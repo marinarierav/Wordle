@@ -1,9 +1,23 @@
+import Letter from "./Letter";
+
 function Word({ text }) {
+  const getLetters = function () {
+    const letters = [];
+    for (let i = 1; i <= 5; i++) {
+      letters.push(
+        <li>
+          <Letter id={i} key={i} />
+        </li>
+      );
+    }
+    return letters;
+  };
+
+  const letters = getLetters();
+
   return (
-    <div className="list">
-      <div className="card">
-        <h2>{text}</h2>
-      </div>
+    <div>
+      <ul>{letters}</ul>
     </div>
   );
 }
