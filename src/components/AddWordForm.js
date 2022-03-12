@@ -1,7 +1,7 @@
 import React from "react";
 import { MAX_LETTERS } from "./Word";
 
-function AddWordForm({ addWord, className }) {
+function AddWordForm({ addWord }) {
   const [text, setText] = React.useState("");
 
   const handleSubmit = (e) => {
@@ -13,14 +13,16 @@ function AddWordForm({ addWord, className }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className={className}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-    </form>
+    <div className="content--row">
+      <form onSubmit={handleSubmit}>
+        <input
+          className="keyboard"
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+      </form>
+    </div>
   );
 }
 

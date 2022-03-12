@@ -53,11 +53,11 @@ function Word({ text }) {
   }, [text]);
 
   return (
-    <div>
+    <div class="content--row">
       <ul>
         {letters.map((letter) => {
           return (
-            <li>
+            <li class="letter-list">
               <Letter letter={letter.letter} type={letter.type} />
             </li>
           );

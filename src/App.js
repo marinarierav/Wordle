@@ -43,7 +43,7 @@ function App() {
         {words.map((word, index) => {
           return <Word text={word.text}></Word>;
         })}
-        <AddWordForm addWord={addWord} className="card" />
+        <AddWordForm addWord={addWord} />
         {isModalOpen && (
           <Modal
             onCancel={closeModalHandler && reloadWindow}
@@ -53,6 +53,12 @@ function App() {
           />
         )}
         {isModalOpen && <Backdrop onClick={closeModalHandler} />}
+      </div>
+      <div className="content content--row">
+        <p>Creator: marinarierav</p>
+        <a href="https://github.com/marinarierav">
+          <button className="btn">@GitHub</button>
+        </a>
       </div>
     </div>
   );

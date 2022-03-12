@@ -4,8 +4,9 @@
 
 body {
   font-family: sans-serif;
-  margin: 3rem;
+  margin: auto;
   background-color: #209cee;
+  text-align: center;
 }
 
 h1,
@@ -50,7 +51,7 @@ h2 {
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  min-width: 2.5rem;
+  min-width: 3rem;
   min-height: 4.5rem;
   padding: 0.1rem;
 }
@@ -67,7 +68,10 @@ h2 {
   background: #e8e8e8;
   border-radius: 4px;
   padding: 5px;
-  max-width: 50em;
+  margin: auto;
+  margin-bottom: 1em;
+  max-width: 20rem;
+  padding-bottom: 1em;
 }
 
 .actions {
@@ -100,10 +104,24 @@ h2 {
 ul {
   list-style-type: none;
   overflow: hidden;
+  display: flex;
+  justify-content: space-evenly;
+  padding-inline-start: 0px;
 }
 
-li {
-  float: left;
+.letter-list {
   padding: 0.1rem;
   text-align: center;
+}
+
+.content--row {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.keyboard {
+  width: 100%;
+  min-height: 3em;
+  font-size: large;
+  text-transform: uppercase;
 }
