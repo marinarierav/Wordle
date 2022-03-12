@@ -1,9 +1,7 @@
 function Letter({ letter }) {
   return (
-    <div className="list">
-      <div className="card">
-        <h2>{letter}</h2>
-      </div>
+    <div className="letter">
+      <h2>{letter}</h2>
     </div>
   );
 }

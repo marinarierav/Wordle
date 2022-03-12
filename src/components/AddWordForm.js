@@ -6,7 +6,8 @@ function AddWordForm({ addWord, className }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!text) return;
-    addWord(text);
+    if (text.length !== 5) return;
+    addWord(text.toUpperCase());
     setText("");
   };
 
