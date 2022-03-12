@@ -3,11 +3,12 @@ import AddWordForm from "./components/AddWordForm";
 import Word from "./components/Word";
 
 function App() {
-  const [words, setWords] = React.useState(Array(6).fill({ text: "" }));
-
+  const MAX_WORDS = 6;
+  const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
   const [currentWordIndex, setCurrentWord] = React.useState(0);
 
   const addWord = (text) => {
+    if (currentWordIndex === MAX_WORDS) return;
     const newWords = words;
     newWords[currentWordIndex] = { text };
     setCurrentWord(currentWordIndex + 1);

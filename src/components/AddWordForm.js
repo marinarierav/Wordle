@@ -1,4 +1,5 @@
 import React from "react";
+import { MAX_LETTERS } from "./Word";
 
 function AddWordForm({ addWord, className }) {
   const [text, setText] = React.useState("");
@@ -6,7 +7,7 @@ function AddWordForm({ addWord, className }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!text) return;
-    if (text.length !== 5) return;
+    if (text.length !== MAX_LETTERS) return;
     addWord(text.toUpperCase());
     setText("");
   };
