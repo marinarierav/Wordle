@@ -2,6 +2,8 @@ import React from "react";
 import AddWordForm from "./components/AddWordForm";
 import Word from "./components/Word";
 
+export const GROUNDTRUTH = "CALIU";
+
 function App() {
   const MAX_WORDS = 6;
   const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
@@ -13,6 +15,9 @@ function App() {
     newWords[currentWordIndex] = { text };
     setCurrentWord(currentWordIndex + 1);
     setWords(newWords);
+    if (text === GROUNDTRUTH) {
+      setCurrentWord(MAX_WORDS);
+    }
   };
 
   return (

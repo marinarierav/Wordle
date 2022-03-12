@@ -55,6 +55,14 @@ h2 {
   padding: 0.1rem;
 }
 
+.letter--correct {
+  background-color: rgb(159, 226, 133);
+}
+
+.letter--exist {
+  background-color: rgb(243, 231, 124);
+}
+
 .content {
   background: #e8e8e8;
   border-radius: 4px;
