@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import AddWordForm from "./components/AddWordForm";
+import Backdrop from "./components/Backdrop";
+import Modal from "./components/Modal";
 import Word from "./components/Word";
 
 export const GROUNDTRUTH = "CALIU";
@@ -17,8 +19,16 @@ function App() {
     setWords(newWords);
     if (text === GROUNDTRUTH) {
       setCurrentWord(MAX_WORDS);
+      setIsModalOpen(true);
     }
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  function closeModalHandler() {
+    setIsModalOpen(false);
+    return true;
+  }
 
   return (
     <div>
@@ -28,6 +38,15 @@ function App() {
           return <Word text={word.text}></Word>;
         })}
         <AddWordForm addWord={addWord} className="card" />
+        {isModalOpen && (
+          <Modal
+            onCancel={closeModalHandler}
+            onCancelText="Reintentar"
+            onConfirm={() => closeModalHandler()}
+            onConfirmText="Acceptar"
+          />
+        )}
+        {isModalOpen && <Backdrop onClick={closeModalHandler} />}
       </div>
     </div>
   );
