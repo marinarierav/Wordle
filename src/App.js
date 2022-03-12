@@ -4,7 +4,8 @@ import Backdrop from "./components/Backdrop";
 import Modal from "./components/Modal";
 import Word from "./components/Word";
 
-export const GROUNDTRUTH = "CALIU";
+const WORDS = ["CALIU", "CALOR", "PAUTA", "SOMNI", "SALTA", "DONAR", "XIULA"];
+export const GROUNDTRUTH = WORDS[Math.floor(Math.random() * WORDS.length)];
 
 function App() {
   const MAX_WORDS = 6;
@@ -30,6 +31,11 @@ function App() {
     return true;
   }
 
+  function reloadWindow() {
+    window.location.reload(false);
+    return true;
+  }
+
   return (
     <div>
       <h1 className="title">Wordle</h1>
@@ -40,9 +46,9 @@ function App() {
         <AddWordForm addWord={addWord} className="card" />
         {isModalOpen && (
           <Modal
-            onCancel={closeModalHandler}
+            onCancel={closeModalHandler && reloadWindow}
             onCancelText="Reintentar"
-            onConfirm={() => closeModalHandler()}
+            onConfirm={closeModalHandler}
             onConfirmText="Acceptar"
           />
         )}
