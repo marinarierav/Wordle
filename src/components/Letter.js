@@ -1,20 +1,17 @@
-import { GROUNDTRUTH } from "../App";
+export const LETTER_CORRECT = 1;
+export const LETTER_EXIST = 2;
+export const LETTER_WRONG = 3;
 
-function Letter({ letter, index }) {
-  const validateLetterExists = () => {
-    if (letter.length <= 0) return;
-    let count = (GROUNDTRUTH.match(new RegExp(letter, "g")) || []).length;
-    return count > 0;
-  };
-
-  const isCorrect = letter === GROUNDTRUTH[index];
-  const isExisting = !isCorrect && validateLetterExists();
-
+function Letter({ letter, type }) {
   return (
     <div
       className={
         "letter " +
-        (isCorrect ? "letter--correct" : isExisting ? "letter--exist" : "")
+        (type === LETTER_CORRECT
+          ? "letter--correct"
+          : type === LETTER_EXIST
+          ? "letter--exist"
+          : "")
       }
     >
       <h2>{letter}</h2>
