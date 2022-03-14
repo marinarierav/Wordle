@@ -9,13 +9,10 @@ body {
   text-align: center;
 }
 
-h1,
-h2 {
-  color: #333333;
-}
-
 .title {
   color: white;
+  max-width: 20em;
+  margin: auto;
 }
 
 .btn {

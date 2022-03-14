@@ -3,7 +3,14 @@ import Game from "./components/game/Game";
 function App() {
   return (
     <div>
-      <h1 className="title">Wordle</h1>
+      <ul className="title title--container">
+        <li className="title--box">
+          <h1>Wordle</h1>
+        </li>
+        <li className="title--box">
+          <p>(Català)</p>
+        </li>
+      </ul>
       <div className="content">
         <Game></Game>
       </div>
