@@ -12,8 +12,9 @@ function App() {
   const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
   const [currentWordIndex, setCurrentWord] = React.useState(0);
 
-  const addWord = (text) => {
+  function addWord(text: string): void {
     if (currentWordIndex === MAX_WORDS) return;
+
     const newWords = words;
     newWords[currentWordIndex] = { text };
     setCurrentWord(currentWordIndex + 1);
@@ -22,18 +23,16 @@ function App() {
       setCurrentWord(MAX_WORDS);
       setIsModalOpen(true);
     }
-  };
+  }
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function closeModalHandler() {
+  function closeModalHandler(): void {
     setIsModalOpen(false);
-    return true;
   }
 
-  function reloadWindow() {
-    window.location.reload(false);
-    return true;
+  function reloadWindow(): void {
+    window.location.reload();
   }
 
   return (
@@ -46,7 +45,7 @@ function App() {
         <AddWordForm addWord={addWord} />
         {isModalOpen && (
           <Modal
-            onCancel={closeModalHandler && reloadWindow}
+            onCancel={reloadWindow}
             onCancelText="Reintentar"
             onConfirm={closeModalHandler}
             onConfirmText="Acceptar"

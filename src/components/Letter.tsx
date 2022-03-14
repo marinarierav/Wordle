@@ -2,7 +2,17 @@ export const LETTER_CORRECT = 1;
 export const LETTER_EXIST = 2;
 export const LETTER_WRONG = 3;
 
-function Letter({ letter, type }) {
+type LetterType =
+  | typeof LETTER_CORRECT
+  | typeof LETTER_EXIST
+  | typeof LETTER_WRONG;
+
+export interface LetterInterface {
+  letter: string;
+  type: LetterType;
+}
+
+function Letter({ letter, type }: LetterInterface) {
   return (
     <div
       className={

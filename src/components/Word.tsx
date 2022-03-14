@@ -1,16 +1,25 @@
 import React, { useEffect } from "react";
 import { GROUNDTRUTH } from "../App";
-import Letter, { LETTER_CORRECT, LETTER_EXIST, LETTER_WRONG } from "./Letter";
+import Letter, {
+  LetterInterface,
+  LETTER_CORRECT,
+  LETTER_EXIST,
+  LETTER_WRONG,
+} from "./Letter";
 
 export const MAX_LETTERS = 5;
 
-function Word({ text }) {
+export interface WordInterface {
+  text: string;
+}
+
+function Word({ text }: WordInterface) {
   const [letters, setLetters] = React.useState(
     Array(MAX_LETTERS).fill({ letter: "" })
   );
 
   const countLetters = (letters = []) => {
-    let letterCount = [];
+    let letterCount: { [index: string]: number } = {};
     letters.forEach((letter) => {
       letterCount[letter] = (
         GROUNDTRUTH.match(new RegExp(letter, "g")) || []
@@ -25,7 +34,7 @@ function Word({ text }) {
     let letterCount = countLetters([...new Set([...text])]);
 
     // Set correct letters
-    let letters = [...text].map((letter, index) => {
+    let letters: LetterInterface[] = [...text].map((letter, index) => {
       const isCorrect = letter === GROUNDTRUTH[index];
 
       if (isCorrect) {
@@ -37,12 +46,12 @@ function Word({ text }) {
     });
 
     // Set misplaced letters
-    letters = letters.map((letter) => {
+    letters = letters.map((letter, index) => {
       if (letter.type === LETTER_CORRECT) return letter;
 
       const isExisting = letterCount[letter.letter] > 0;
       if (isExisting) {
-        letterCount[letter] -= 1;
+        letterCount[letter.letter] -= 1;
       }
       const type = isExisting ? LETTER_EXIST : LETTER_WRONG;
 
@@ -53,11 +62,11 @@ function Word({ text }) {
   }, [text]);
 
   return (
-    <div class="content--row">
+    <div className="content--row">
       <ul>
         {letters.map((letter) => {
           return (
-            <li class="letter-list">
+            <li className="letter-list">
               <Letter letter={letter.letter} type={letter.type} />
             </li>
           );
