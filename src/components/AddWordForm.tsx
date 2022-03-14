@@ -8,6 +8,8 @@ function AddWordForm({ addWord }) {
     e.preventDefault();
     if (!text) return;
     if (text.length !== MAX_LETTERS) return;
+    if (/[^a-z]/i.test(text)) return;
+
     addWord(text.toUpperCase());
     setText("");
   };
