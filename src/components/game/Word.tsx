@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { GROUNDTRUTH } from "../App";
+import React from "react";
+import { GROUNDTRUTH } from "./Game";
 import Letter, {
   LetterInterface,
   LETTER_CORRECT,
@@ -28,7 +28,7 @@ function Word({ text }: WordInterface) {
     return letterCount;
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (text.length <= 0) return;
 
     let letterCount = countLetters([...new Set([...text])]);

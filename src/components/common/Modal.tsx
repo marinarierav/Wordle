@@ -1,10 +1,8 @@
-import { GROUNDTRUTH } from "../App";
-
 function Modal(props) {
   return (
     <div className="modal">
-      <h2>Good job!</h2>
-      <p>The word was "{GROUNDTRUTH}"</p>
+      <h2>{props.title}</h2>
+      <p>{props.text}</p>
       <button className="btn btn--alt" onClick={props.onCancel}>
         {props.onCancelText}
       </button>
