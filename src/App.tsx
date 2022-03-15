@@ -8,7 +8,7 @@ function App() {
           <h1>Worldle: Wordle of the World!</h1>
         </li>
         <li className="title--box">
-          <p>(Català)</p>
+          <p>(English)</p>
         </li>
       </ul>
       <div className="content">
