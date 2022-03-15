@@ -23,11 +23,11 @@ function GameOverModal(props: { isModalOpen: boolean }) {
       {isModalOpen && (
         <Modal
           onCancel={reloadWindow}
-          onCancelText="Reintentar"
+          onCancelText="Retry"
           onConfirm={closeModalHandler}
-          onConfirmText="Acceptar"
-          title="Molt bé!"
-          text={"La paraula era " + GROUNDTRUTH}
+          onConfirmText="Ok"
+          title="Very good!"
+          text={"The country was " + GROUNDTRUTH}
         />
       )}
       {isModalOpen && <Backdrop onClick={closeModalHandler} />}{" "}

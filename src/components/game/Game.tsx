@@ -3,11 +3,88 @@ import AddWordForm from "./AddWordForm";
 import Word from "./Word";
 import GameOverModal from "./modal/GameOverModal";
 
-const WORDS = ["CALIU", "CALOR", "PAUTA", "SOMNI", "SALTA", "DONAR", "XIULA"];
-export const GROUNDTRUTH = WORDS[Math.floor(Math.random() * WORDS.length)];
+const WORDS = {
+  4: [
+    "Chad",
+    "Cuba",
+    "Fiji",
+    "Iran",
+    "Iraq",
+    "Laos",
+    "Mali",
+    "Niue",
+    "Oman",
+    "Peru",
+    "Togo",
+  ],
+  5: [
+    "Benin",
+    "Egypt",
+    "Gabon",
+    "Ghana",
+    "Kenya",
+    "Libya",
+    "Niger",
+    "Sudan",
+    "China",
+    "India",
+    "Japan",
+    "Nepal",
+    "Qatar",
+    "Syria",
+    "Yemen",
+    "Nauru",
+    "Palau",
+    "Samoa",
+    "Tonga",
+    "Italy",
+    "Malta",
+    "Spain",
+  ],
+  6: [
+    "Angola",
+    "Belize",
+    "Bhutan",
+    "Brazil",
+    "Brunei",
+    "Canada",
+    "Cyprus",
+    "France",
+    "Gambia",
+    "Greece",
+    "Guinea",
+    "Guyana",
+    "Israel",
+    "Jordan",
+    "Kosovo",
+    "Kuwait",
+    "Latvia",
+    "Malawi",
+    "Mexico",
+    "Monaco",
+    "Norway",
+    "Panama",
+    "Poland",
+    "Russia",
+    "Rwanda",
+    "Serbia",
+    "Sweden",
+    "Taiwan",
+    "Turkey",
+    "Tuvalu",
+    "Uganda",
+    "Zambia",
+  ],
+};
+export const DIFFICULTY = 4 + Math.floor(Math.random() * 3);
+export const GROUNDTRUTH =
+  WORDS[DIFFICULTY][
+    Math.floor(Math.random() * WORDS[DIFFICULTY].length)
+  ].toUpperCase();
+export const MAX_LETTERS = GROUNDTRUTH.length;
 
 function Game() {
-  const MAX_WORDS = 6;
+  const MAX_WORDS = DIFFICULTY + 1;
   const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
   const [currentWordIndex, setCurrentWord] = React.useState(0);
 

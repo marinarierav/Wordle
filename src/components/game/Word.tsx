@@ -1,13 +1,11 @@
 import React from "react";
-import { GROUNDTRUTH } from "./Game";
+import { GROUNDTRUTH, MAX_LETTERS } from "./Game";
 import Letter, {
   LetterInterface,
   LETTER_CORRECT,
   LETTER_EXIST,
   LETTER_WRONG,
 } from "./Letter";
-
-export const MAX_LETTERS = 5;
 
 export interface WordInterface {
   text: string;
