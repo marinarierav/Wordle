@@ -11,8 +11,30 @@ body {
 
 .title {
   color: white;
-  max-width: 20em;
+  max-width: 22em;
   margin: auto;
+}
+
+.title h2 {
+  font-style: italic;
+  margin-block-start: auto;
+  font-family: serif;
+}
+
+.title h1 {
+  margin-block-end: auto;
+}
+
+.title--container {
+  list-style-type: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 0px;
+}
+
+.title--box {
+  width: 5em;
 }
 
 .btn {
@@ -98,7 +120,7 @@ body {
   left: 0;
 }
 
-ul {
+.letter--container {
   list-style-type: none;
   overflow: hidden;
   display: flex;

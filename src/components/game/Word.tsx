@@ -61,7 +61,7 @@ function Word({ text }: WordInterface) {
 
   return (
     <div className="content--row">
-      <ul>
+      <ul className="letter--container">
         {letters.map((letter) => {
           return (
             <li className="letter-list">

@@ -3,14 +3,18 @@ import Game from "./components/game/Game";
 function App() {
   return (
     <div>
-      <ul className="title title--container">
-        <li className="title--box">
-          <h1>Worldle: Wordle of the World!</h1>
-        </li>
-        <li className="title--box">
-          <p>(English)</p>
-        </li>
-      </ul>
+      <div className="title">
+        <ul className="title--container">
+          <li className="title--box"></li>
+          <li>
+            <h1>Worldle 🌎</h1>
+          </li>
+          <li className="title--box">
+            <p>(English)</p>
+          </li>
+        </ul>
+        <h2>A Wordle of the World!</h2>
+      </div>
       <div className="content">
         <Game></Game>
       </div>
