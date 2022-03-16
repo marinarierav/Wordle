@@ -5,12 +5,13 @@ export function getShareableLink(): string {
 }
 
 export function getShareableText(numberOfTries): string {
-  return `#Worldle (English) 1º ${numberOfTries}/${MAX_LETTERS} \r\n 
-     ⬜⬜⬜⬜🟨 \r\n 
-     🟨🟨⬜⬜🟩 \r\n 
-     ⬜🟨🟩🟨🟩 \r\n 
-     🟩🟩🟩🟩🟩 \r\n 
-    `;
+  return (
+    `#Worldle (English) 1º ${numberOfTries}/${MAX_LETTERS}\r\n` +
+    `⬜⬜⬜⬜🟨 \r\n` +
+    `🟨🟨⬜⬜🟩 \r\n` +
+    `⬜🟨🟩🟨🟩 \r\n` +
+    `🟩🟩🟩🟩🟩 \r\n`
+  );
 }
 
 export function getFullShareable(numberOfTries): string {

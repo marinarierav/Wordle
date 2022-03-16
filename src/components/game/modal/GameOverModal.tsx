@@ -27,8 +27,9 @@ function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
   const [copied, setCopied] = useState(false);
 
   function copy() {
-    const el = document.createElement("input");
+    const el = document.createElement("textarea");
     el.value = getFullShareable(numberOfTries);
+
     document.body.appendChild(el);
     el.select();
     document.execCommand("copy");
