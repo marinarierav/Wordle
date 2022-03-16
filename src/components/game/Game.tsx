@@ -90,7 +90,7 @@ function Game() {
   const [currentWordIndex, setCurrentWord] = React.useState(0);
 
   function addWord(text: string): void {
-    if (currentWordIndex === MAX_WORDS) return;
+    if (isSuccess || currentWordIndex === MAX_WORDS) return;
 
     const newWords = words;
     newWords[currentWordIndex] = { text };
@@ -98,7 +98,6 @@ function Game() {
     setWords(newWords);
 
     if (text === GROUNDTRUTH) {
-      setCurrentWord(MAX_WORDS);
       setSuccess(true);
       setIsModalOpen(true);
     } else if (currentWordIndex + 1 === MAX_WORDS) {
@@ -118,6 +117,7 @@ function Game() {
       <GameOverModal
         isModalOpenInitially={isModalOpen}
         isSuccess={isSuccess}
+        numberOfTries={currentWordIndex + 1}
       ></GameOverModal>
     </div>
   );

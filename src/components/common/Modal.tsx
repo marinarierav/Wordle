@@ -2,7 +2,7 @@ function Modal(props) {
   return (
     <div className="modal">
       <h2>{props.title}</h2>
-      <p>{props.text}</p>
+      {props.children}
       <button className="btn btn--alt" onClick={props.onCancel}>
         {props.onCancelText}
       </button>
