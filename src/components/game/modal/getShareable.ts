@@ -1,4 +1,4 @@
-import { MAX_LETTERS } from "../Game";
+import { MAX_WORDS } from "../Game";
 import { LetterInterface, LETTER_CORRECT, LETTER_EXIST } from "../Letter";
 
 export function getShareableLink(): string {
@@ -29,7 +29,7 @@ export function getShareableText(
   return (
     `#Worldle (English) 1º ${
       isSuccess ? wordHistory.length : "X"
-    }/${MAX_LETTERS}\r\n` + getPrettySquares(wordHistory)
+    }/${MAX_WORDS}\r\n` + getPrettySquares(wordHistory)
   );
 }
 

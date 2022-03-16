@@ -82,10 +82,10 @@ export const GROUNDTRUTH =
     Math.floor(Math.random() * WORDS[DIFFICULTY].length)
   ].toUpperCase();
 export const MAX_LETTERS = GROUNDTRUTH.length;
+export const MAX_WORDS = DIFFICULTY + 1;
 
 function Game() {
   console.log(GROUNDTRUTH);
-  const MAX_WORDS = DIFFICULTY + 1;
   const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
   const [currentWordIndex, setCurrentWord] = React.useState(0);
 
