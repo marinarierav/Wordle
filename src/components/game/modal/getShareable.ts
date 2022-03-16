@@ -23,13 +23,13 @@ export function getPrettySquares(wordHistory: LetterInterface[][]) {
   return prettySquares;
 }
 
-export function getShareableText(numberOfTries, wordHistory): string {
+export function getShareableText(wordHistory): string {
   return (
-    `#Worldle (English) 1º ${numberOfTries}/${MAX_LETTERS}\r\n` +
+    `#Worldle (English) 1º ${wordHistory.length}/${MAX_LETTERS}\r\n` +
     getPrettySquares(wordHistory)
   );
 }
 
-export function getFullShareable(numberOfTries, wordHistory): string {
-  return getShareableText(numberOfTries, wordHistory) + getShareableLink();
+export function getFullShareable(wordHistory): string {
+  return getShareableText(wordHistory) + getShareableLink();
 }

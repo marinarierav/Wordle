@@ -117,7 +117,6 @@ function Game() {
       <GameOverModal
         isModalOpenInitially={isModalOpen}
         isSuccess={isSuccess}
-        numberOfTries={currentWordIndex + 1}
       ></GameOverModal>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   getShareableText,
 } from "./getShareable";
 
-function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
+function GameOverModal({ isModalOpenInitially, isSuccess }) {
   const { wordHistory } = React.useContext(GameContext) as GameContextType;
 
   const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);
@@ -31,7 +31,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
 
   function copy() {
     const el = document.createElement("textarea");
-    el.value = getFullShareable(numberOfTries, wordHistory);
+    el.value = getFullShareable(wordHistory);
 
     document.body.appendChild(el);
     el.select();
@@ -58,7 +58,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
             <li className="">
               <WhatsappShareButton
                 url={getShareableLink()}
-                title={getShareableText(numberOfTries, wordHistory)}
+                title={getShareableText(wordHistory)}
               >
                 <WhatsappIcon size={32} round={true}></WhatsappIcon>
               </WhatsappShareButton>
