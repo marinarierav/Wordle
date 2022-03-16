@@ -3,8 +3,8 @@ import Backdrop from "../../common/Backdrop";
 import Modal from "../../common/Modal";
 import { GROUNDTRUTH } from "../Game";
 
-function GameOverModal(props: { isModalOpen: boolean }) {
-  const [isModalOpen, setIsModalOpen] = React.useState(props.isModalOpen);
+function GameOverModal({ isModalOpenInitially, isSuccess }) {
+  const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);
 
   function closeModalHandler(): void {
     setIsModalOpen(false);
@@ -15,8 +15,8 @@ function GameOverModal(props: { isModalOpen: boolean }) {
   }
 
   React.useEffect(() => {
-    setIsModalOpen(props.isModalOpen);
-  }, [props.isModalOpen]);
+    setIsModalOpen(isModalOpenInitially);
+  }, [isModalOpenInitially]);
 
   return (
     <div>
@@ -26,7 +26,7 @@ function GameOverModal(props: { isModalOpen: boolean }) {
           onCancelText="Retry"
           onConfirm={closeModalHandler}
           onConfirmText="Ok"
-          title="Very good!"
+          title={isSuccess ? "Very good!" : "Ooops"}
           text={"The country was " + GROUNDTRUTH}
         />
       )}

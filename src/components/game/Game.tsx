@@ -84,6 +84,7 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 
 function Game() {
+  console.log(GROUNDTRUTH);
   const MAX_WORDS = DIFFICULTY + 1;
   const [words, setWords] = React.useState(Array(MAX_WORDS).fill({ text: "" }));
   const [currentWordIndex, setCurrentWord] = React.useState(0);
@@ -95,13 +96,18 @@ function Game() {
     newWords[currentWordIndex] = { text };
     setCurrentWord(currentWordIndex + 1);
     setWords(newWords);
+
     if (text === GROUNDTRUTH) {
       setCurrentWord(MAX_WORDS);
+      setSuccess(true);
+      setIsModalOpen(true);
+    } else if (currentWordIndex + 1 === MAX_WORDS) {
       setIsModalOpen(true);
     }
   }
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isSuccess, setSuccess] = React.useState(false);
 
   return (
     <div>
@@ -109,7 +115,10 @@ function Game() {
         return <Word text={word.text}></Word>;
       })}
       <AddWordForm addWord={addWord} />
-      <GameOverModal isModalOpen={isModalOpen}></GameOverModal>
+      <GameOverModal
+        isModalOpenInitially={isModalOpen}
+        isSuccess={isSuccess}
+      ></GameOverModal>
     </div>
   );
 }
