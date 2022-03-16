@@ -134,8 +134,22 @@ body {
 }
 
 .letter-list {
-  padding: 0.1rem;
+  padding: 0.3rem 0.1rem;
   text-align: center;
+}
+
+.letter-list h2 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.letter--container {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 .content--row {
@@ -148,6 +162,7 @@ body {
   min-height: 3em;
   font-size: large;
   text-transform: uppercase;
+  margin-block-start: 0.5rem;
 }
 
 .share {
@@ -166,4 +181,11 @@ body {
   display: block;
   height: 2.5em;
   padding: 0.5em 1em;
+}
+
+.title ul {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
