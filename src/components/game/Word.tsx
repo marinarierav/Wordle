@@ -1,5 +1,6 @@
 import React from "react";
 import { GROUNDTRUTH, MAX_LETTERS } from "./Game";
+import { GameContext, GameContextType } from "./GameContext";
 import Letter, {
   LetterInterface,
   LETTER_CORRECT,
@@ -12,6 +13,8 @@ export interface WordInterface {
 }
 
 function Word({ text }: WordInterface) {
+  const { addWord } = React.useContext(GameContext) as GameContextType;
+
   const [letters, setLetters] = React.useState(
     Array(MAX_LETTERS).fill({ letter: "" })
   );
@@ -56,6 +59,7 @@ function Word({ text }: WordInterface) {
       return { letter: letter.letter, type: type };
     });
 
+    addWord(letters);
     setLetters(letters);
   }, [text]);
 

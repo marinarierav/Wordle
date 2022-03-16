@@ -3,6 +3,7 @@ import { WhatsappIcon, WhatsappShareButton } from "react-share";
 import Backdrop from "../../common/Backdrop";
 import Modal from "../../common/Modal";
 import { GROUNDTRUTH } from "../Game";
+import { GameContext, GameContextType } from "../GameContext";
 import {
   getFullShareable,
   getShareableLink,
@@ -10,6 +11,8 @@ import {
 } from "./getShareable";
 
 function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
+  const { wordHistory } = React.useContext(GameContext) as GameContextType;
+
   const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);
 
   function closeModalHandler(): void {
@@ -28,7 +31,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
 
   function copy() {
     const el = document.createElement("textarea");
-    el.value = getFullShareable(numberOfTries);
+    el.value = getFullShareable(numberOfTries, wordHistory);
 
     document.body.appendChild(el);
     el.select();
@@ -55,7 +58,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess, numberOfTries }) {
             <li className="">
               <WhatsappShareButton
                 url={getShareableLink()}
-                title={getShareableText(numberOfTries)}
+                title={getShareableText(numberOfTries, wordHistory)}
               >
                 <WhatsappIcon size={32} round={true}></WhatsappIcon>
               </WhatsappShareButton>
