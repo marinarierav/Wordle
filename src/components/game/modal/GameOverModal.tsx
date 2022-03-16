@@ -31,7 +31,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }) {
 
   function copy() {
     const el = document.createElement("textarea");
-    el.value = getFullShareable(wordHistory);
+    el.value = getFullShareable(wordHistory, isSuccess);
 
     document.body.appendChild(el);
     el.select();
@@ -58,7 +58,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }) {
             <li className="">
               <WhatsappShareButton
                 url={getShareableLink()}
-                title={getShareableText(wordHistory)}
+                title={getShareableText(wordHistory, isSuccess)}
               >
                 <WhatsappIcon size={32} round={true}></WhatsappIcon>
               </WhatsappShareButton>

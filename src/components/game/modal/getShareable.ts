@@ -6,7 +6,6 @@ export function getShareableLink(): string {
 }
 
 export function getPrettySquares(wordHistory: LetterInterface[][]) {
-  console.log(wordHistory);
   let prettySquares = "";
   wordHistory.forEach((word) => {
     let row = "";
@@ -23,13 +22,20 @@ export function getPrettySquares(wordHistory: LetterInterface[][]) {
   return prettySquares;
 }
 
-export function getShareableText(wordHistory): string {
+export function getShareableText(
+  wordHistory: LetterInterface[][],
+  isSuccess: boolean
+): string {
   return (
-    `#Worldle (English) 1º ${wordHistory.length}/${MAX_LETTERS}\r\n` +
-    getPrettySquares(wordHistory)
+    `#Worldle (English) 1º ${
+      isSuccess ? wordHistory.length : "X"
+    }/${MAX_LETTERS}\r\n` + getPrettySquares(wordHistory)
   );
 }
 
-export function getFullShareable(wordHistory): string {
-  return getShareableText(wordHistory) + getShareableLink();
+export function getFullShareable(
+  wordHistory: LetterInterface[][],
+  isSuccess: boolean
+): string {
+  return getShareableText(wordHistory, isSuccess) + getShareableLink();
 }
