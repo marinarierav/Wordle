@@ -1,4 +1,4 @@
-import Game from "./components/game/Game";
+import Game, { MAX_LETTERS } from "./components/game/Game";
 
 function App() {
   return (
@@ -16,6 +16,10 @@ function App() {
         <h2>A Wordle of the World!</h2>
       </div>
       <div className="content">
+        <p className="">Mixed countries, different difficulty levels...</p>
+        <p className="description">
+          Can you guess which country has {MAX_LETTERS} letters?
+        </p>
         <Game></Game>
       </div>
       <div className="content content--row">

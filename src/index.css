@@ -25,6 +25,11 @@ body {
   margin-block-end: auto;
 }
 
+.description {
+  font-style: italic;
+  color: #9c1458;
+}
+
 .title--container {
   list-style-type: none;
   overflow: hidden;
