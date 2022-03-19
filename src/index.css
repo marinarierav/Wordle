@@ -2,17 +2,29 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+main,
+#root {
+  height: 100%;
+  margin: 0px;
+}
+
 body {
   font-family: sans-serif;
   margin: auto;
   background-color: #209cee;
   text-align: center;
+  max-width: 22em;
 }
 
 .title {
   color: white;
-  max-width: 22em;
   margin: auto;
+}
+
+.title h1 {
+  margin-block-end: auto;
 }
 
 .title h2 {
@@ -21,13 +33,16 @@ body {
   font-family: serif;
 }
 
-.title h1 {
-  margin-block-end: auto;
-}
-
 .description {
   font-style: italic;
   color: #9c1458;
+}
+
+.title ul {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 .title--container {
@@ -71,31 +86,28 @@ body {
   background-color: #f8dae9;
 }
 
-.letter {
-  background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  min-width: 3rem;
-  min-height: 4.5rem;
-  padding: 0.1rem;
-}
-
-.letter--correct {
-  background-color: rgb(159, 226, 133);
-}
-
-.letter--exist {
-  background-color: rgb(243, 231, 124);
-}
-
 .content {
   background: #e8e8e8;
   border-radius: 4px;
   padding: 5px;
-  margin: auto;
   margin-bottom: 1em;
-  max-width: 22rem;
   padding-bottom: 1em;
+}
+
+.game--container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.game--box {
+  flex-grow: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 .actions {
@@ -125,6 +137,33 @@ body {
   left: 0;
 }
 
+.letter {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+}
+
+.letter--correct {
+  background-color: rgb(159, 226, 133);
+}
+
+.letter--exist {
+  background-color: rgb(243, 231, 124);
+}
+
+.word--container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
 .letter--container {
   list-style-type: none;
   overflow: hidden;
@@ -136,11 +175,14 @@ body {
 .letter-list {
   padding: 0.3rem 0.1rem;
   text-align: center;
+  width: 100%;
 }
 
 .letter-list h2 {
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-block-start: auto;
+  margin-block-end: auto;
 }
 
 .letter--container {
@@ -151,16 +193,17 @@ body {
 }
 
 .content--row {
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .keyboard {
   width: 100%;
-  min-height: 3em;
+  min-height: 2.5em;
   font-size: large;
   text-transform: uppercase;
   margin-block-start: 0.5rem;
+  text-align: center;
 }
 
 .share {
@@ -179,11 +222,4 @@ body {
   display: block;
   height: 2.5em;
   padding: 0.5em 1em;
-}
-
-.title ul {
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
 }

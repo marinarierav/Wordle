@@ -17,18 +17,22 @@ function App() {
           </ul>
           <h2>A Wordle of the World!</h2>
         </div>
-        <div className="content">
-          <p className="">Mixed countries, different difficulty levels...</p>
-          <p className="description">
+        <div className="content game--container">
+          <p className="game--box">
+            Mixed countries, different difficulty levels...
+          </p>
+          <p className="game--box description">
             Can you guess which country has {MAX_LETTERS} letters?
           </p>
           <Game></Game>
         </div>
-        <div className="content content--row">
-          <p>Creator: marinarierav</p>
-          <a href="https://github.com/marinarierav">
-            <button className="btn">@GitHub</button>
-          </a>
+        <div className="content">
+          <div className="content--row">
+            <p>Creator: marinarierav</p>
+            <a href="https://github.com/marinarierav">
+              <button className="btn">@GitHub</button>
+            </a>
+          </div>
         </div>
       </main>
     </GameContextProvider>

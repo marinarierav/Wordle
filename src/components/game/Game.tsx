@@ -109,7 +109,7 @@ function Game() {
   const [isSuccess, setSuccess] = React.useState(false);
 
   return (
-    <div>
+    <div className="word--container">
       {words.map((word, index) => {
         return <Word text={word.text}></Word>;
       })}
