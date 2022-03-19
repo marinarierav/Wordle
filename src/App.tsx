@@ -27,12 +27,10 @@ function App() {
           <Game></Game>
         </div>
         <div className="content">
-          <div className="content--row">
-            <p>Creator: marinarierav</p>
-            <a href="https://github.com/marinarierav">
-              <button className="btn">@GitHub</button>
-            </a>
-          </div>
+          <p>Creator: marinarierav</p>
+          <a href="https://github.com/marinarierav">
+            <button className="btn">@GitHub</button>
+          </a>
         </div>
       </main>
     </GameContextProvider>

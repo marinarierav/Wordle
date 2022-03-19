@@ -64,17 +64,15 @@ function Word({ text }: WordInterface) {
   }, [text]);
 
   return (
-    <div className="content--row">
-      <ul className="letter--container">
-        {letters.map((letter) => {
-          return (
-            <li className="letter-list">
-              <Letter letter={letter.letter} type={letter.type} />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="letter--container">
+      {letters.map((letter) => {
+        return (
+          <li className="letter-list">
+            <Letter letter={letter.letter} type={letter.type} />
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

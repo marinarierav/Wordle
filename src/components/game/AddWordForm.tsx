@@ -15,7 +15,7 @@ function AddWordForm({ addWord }) {
   };
 
   return (
-    <div className="content--row">
+    <div className="keyboard--container">
       <form onSubmit={handleSubmit}>
         <input
           className="keyboard"

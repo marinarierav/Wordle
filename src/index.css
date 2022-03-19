@@ -15,7 +15,7 @@ body {
   margin: auto;
   background-color: #209cee;
   text-align: center;
-  max-width: 22em;
+  max-width: 22rem;
 }
 
 .title {
@@ -54,7 +54,7 @@ body {
 }
 
 .title--box {
-  width: 5em;
+  width: 5rem;
 }
 
 .btn {
@@ -89,9 +89,12 @@ body {
 .content {
   background: #e8e8e8;
   border-radius: 4px;
-  padding: 5px;
-  margin-bottom: 1em;
-  padding-bottom: 1em;
+  padding: 0.5rem 1rem;
+}
+
+.content--row {
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
 
 .game--container {
@@ -99,6 +102,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-bottom: 0.5rem;
 }
 
 .game--box {
@@ -108,6 +112,7 @@ body {
 main {
   display: flex;
   flex-direction: column;
+  padding: 0.3rem;
 }
 
 .actions {
@@ -145,7 +150,7 @@ main {
   min-height: 2.5rem;
   width: 100%;
   height: 100%;
-  padding: 0.1rem;
+  display: flex;
 }
 
 .letter--correct {
@@ -162,6 +167,7 @@ main {
   flex-direction: column;
   justify-content: space-evenly;
   height: 100%;
+  padding-top: 0.5rem;
 }
 
 .letter--container {
@@ -173,7 +179,7 @@ main {
 }
 
 .letter-list {
-  padding: 0.3rem 0.1rem;
+  padding: 0.2rem;
   text-align: center;
   width: 100%;
 }
@@ -190,20 +196,23 @@ main {
   margin-block-end: 0px;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-}
-
-.content--row {
-  padding-left: 0.5em;
-  padding-right: 0.5em;
+  height: 100%;
 }
 
 .keyboard {
   width: 100%;
-  min-height: 2.5em;
+  min-height: 2.5rem;
   font-size: large;
   text-transform: uppercase;
   margin-block-start: 0.5rem;
   text-align: center;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
+  border-width: thin;
+}
+
+.keyboard--container {
+  padding: 0.2rem;
 }
 
 .share {
@@ -220,6 +229,12 @@ main {
 
 .share--button {
   display: block;
-  height: 2.5em;
-  padding: 0.5em 1em;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+}
+
+p,
+a {
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
 }
