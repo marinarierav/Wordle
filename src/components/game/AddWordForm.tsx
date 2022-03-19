@@ -18,6 +18,7 @@ function AddWordForm({ addWord }) {
     <div className="keyboard--container">
       <form onSubmit={handleSubmit}>
         <input
+          placeholder="Type a country... (e.g. Spain)"
           className="keyboard"
           type="text"
           value={text}

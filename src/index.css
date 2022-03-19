@@ -13,7 +13,7 @@ main,
 body {
   font-family: sans-serif;
   margin: auto;
-  background-color: #209cee;
+  background-color: #50b9ff;
   text-align: center;
   max-width: 22rem;
 }
@@ -21,6 +21,7 @@ body {
 .title {
   color: white;
   margin: auto;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .title h1 {
@@ -36,6 +37,11 @@ body {
 .description {
   font-style: italic;
   color: #9c1458;
+}
+
+.description--highlight {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
 }
 
 .title ul {
@@ -209,6 +215,12 @@ main {
   border-radius: 4px;
   box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
   border-width: thin;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 20%), 0 0 2px #383838;
+  border: thin;
+}
+
+.keyboard::placeholder {
+  text-transform: none;
 }
 
 .keyboard--container {

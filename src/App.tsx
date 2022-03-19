@@ -22,7 +22,11 @@ function App() {
             Mixed countries, different difficulty levels...
           </p>
           <p className="game--box description">
-            Can you guess which country has {MAX_LETTERS} letters?
+            Can you guess which country{" "}
+            <span className="description--highlight">
+              has {MAX_LETTERS} letters
+            </span>
+            ?
           </p>
           <Game></Game>
         </div>
