@@ -52,6 +52,18 @@ function GameOverModal({ isModalOpenInitially, isSuccess }) {
           title={isSuccess ? "Very good!" : "Ooops"}
         >
           <p>The country was {GROUNDTRUTH}</p>
+          <p>
+            Current streak:{" "}
+            <span className="share">
+              {localStorage.getItem("currentCombo") || "0"}
+            </span>
+          </p>
+          <p>
+            Total Wins:{" "}
+            <span className="share">
+              {localStorage.getItem("totalWins") || "0"}
+            </span>
+          </p>
           <p className="share">Share:</p>
 
           <ul className="share--container">

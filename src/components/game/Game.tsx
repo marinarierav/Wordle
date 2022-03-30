@@ -75,6 +75,14 @@ const WORDS = [
   "Zambia",
 ];
 
+const dateResolved = localStorage.getItem("dateResolved");
+const currentCombo = localStorage.getItem("currentCombo");
+const totalWins = localStorage.getItem("totalWins");
+//localStorage.clear();
+console.log(currentCombo);
+console.log(totalWins);
+console.log(dateResolved);
+
 const seedForToday = Intl.DateTimeFormat("es-ES", {
   year: "numeric",
   month: "numeric",
@@ -101,15 +109,27 @@ function Game() {
     setWords(newWords);
 
     if (text === GROUNDTRUTH) {
+      if (dateResolved !== seedForToday) {
+        localStorage.setItem("isResolved", "1");
+        localStorage.setItem("dateResolved", seedForToday);
+        localStorage.setItem(
+          "currentCombo",
+          `${parseInt(currentCombo || "0") + 1}`
+        );
+        localStorage.setItem("totalWins", `${parseInt(totalWins || "0") + 1}`);
+      }
       setSuccess(true);
       setIsModalOpen(true);
     } else if (currentWordIndex + 1 === MAX_WORDS) {
+      localStorage.setItem("currentCombo", "0");
       setIsModalOpen(true);
     }
   }
 
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [isSuccess, setSuccess] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = React.useState(
+    dateResolved === seedForToday
+  );
+  const [isSuccess, setSuccess] = React.useState(dateResolved === seedForToday);
 
   return (
     <div className="word--container">
