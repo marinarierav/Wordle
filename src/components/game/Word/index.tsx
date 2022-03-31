@@ -1,6 +1,6 @@
 import React from "react";
-import { GROUNDTRUTH, MAX_LETTERS } from "./Game";
-import { GameContext, GameContextType } from "./GameContext";
+import { GROUNDTRUTH, MAX_LETTERS } from "..";
+import { GameContext, GameContextType } from "../GameContext";
 import Letter, {
   LetterInterface,
   LETTER_CORRECT,

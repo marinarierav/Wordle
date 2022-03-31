@@ -1,5 +1,5 @@
 import React from "react";
-import { MAX_LETTERS } from "./Game";
+import { MAX_LETTERS } from "../..";
 
 function AddWordForm({ addWord }) {
   const [text, setText] = React.useState("");

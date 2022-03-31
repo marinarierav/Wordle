@@ -159,6 +159,11 @@ main {
   display: flex;
 }
 
+.letter--keyboard {
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+}
+
 .letter--correct {
   background-color: rgb(159, 226, 133);
 }
@@ -176,8 +181,11 @@ main {
   padding-top: 0.5rem;
 }
 
-.letter--container {
+ul {
   list-style-type: none;
+}
+
+.letter--container {
   overflow: hidden;
   display: flex;
   justify-content: space-evenly;
@@ -190,7 +198,18 @@ main {
   width: 100%;
 }
 
+.letter-list--keyboard {
+  padding: 0.1rem;
+}
+
 .letter-list h2 {
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  margin-block-start: auto;
+  margin-block-end: auto;
+}
+
+.letter-list p {
   margin-inline-start: auto;
   margin-inline-end: auto;
   margin-block-start: auto;
@@ -210,7 +229,6 @@ main {
   min-height: 2.5rem;
   font-size: large;
   text-transform: uppercase;
-  margin-block-start: 0.5rem;
   text-align: center;
   border-radius: 4px;
   box-shadow: 0 1px 4px rgb(0 0 0 / 20%);
@@ -219,12 +237,20 @@ main {
   border: thin;
 }
 
+.button--keyboard {
+  width: 100%;
+}
+
 .keyboard::placeholder {
   text-transform: none;
 }
 
 .keyboard--container {
   padding: 0.2rem;
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 .share {

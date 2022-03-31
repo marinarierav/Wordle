@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { WhatsappIcon, WhatsappShareButton } from "react-share";
 import Backdrop from "../../common/Backdrop";
 import Modal from "../../common/Modal";
-import { GROUNDTRUTH } from "../Game";
+import { GROUNDTRUTH } from "..";
 import { GameContext, GameContextType } from "../GameContext";
 import {
   getFullShareable,

@@ -1,8 +1,9 @@
 import React from "react";
-import AddWordForm from "./AddWordForm";
+import AddWordForm from "./Word/AddWordForm";
 import Word from "./Word";
-import GameOverModal from "./modal/GameOverModal";
+import GameOverModal from "./GameOverModal";
 import seedrandom from "seedrandom";
+import Keyboard from "./Keyboard";
 
 const WORDS = [
   //4
@@ -136,7 +137,8 @@ function Game() {
       {words.map((word, index) => {
         return <Word text={word.text}></Word>;
       })}
-      <AddWordForm addWord={addWord} />
+      <Keyboard addWord={addWord} />
+      {/* <AddWordForm addWord={addWord} /> */}
       <GameOverModal
         isModalOpenInitially={isModalOpen}
         isSuccess={isSuccess}

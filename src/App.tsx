@@ -1,5 +1,5 @@
-import Game, { MAX_LETTERS } from "./components/game/Game";
-import GameContextProvider from "./components/game/GameContext";
+import Game, { MAX_LETTERS } from "./components/Game";
+import GameContextProvider from "./components/Game/GameContext";
 
 function App() {
   return (

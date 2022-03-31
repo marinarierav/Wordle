@@ -1,5 +1,5 @@
-import { MAX_WORDS } from "../Game";
-import { LetterInterface, LETTER_CORRECT, LETTER_EXIST } from "../Letter";
+import { MAX_WORDS } from "..";
+import { LetterInterface, LETTER_CORRECT, LETTER_EXIST } from "../Word/Letter";
 
 export function getShareableLink(): string {
   return "marinarierav-worldle.herokuapp.com";
