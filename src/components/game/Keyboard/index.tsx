@@ -6,7 +6,7 @@ function Keyboard({ enterLetter }: { enterLetter: Function }): JSX.Element {
       <ul className="letter--container">
         {[...letters].map((letter, index) => {
           return (
-            <li className="letter-list letter-list--keyboard">
+            <li key={index} className="letter-list letter-list--keyboard">
               <Letter letter={letter} enterLetter={enterLetter} />
             </li>
           );
@@ -19,7 +19,7 @@ function Keyboard({ enterLetter }: { enterLetter: Function }): JSX.Element {
     <ul className="keyboard--container">
       {["QWERTYUIOP", "ASDFGHJKL", "⌫ZXCVBNM↩"].map((letters, index) => {
         return (
-          <li>
+          <li key={index}>
             <LetterRow letters={letters} />
           </li>
         );

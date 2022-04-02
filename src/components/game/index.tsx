@@ -174,7 +174,9 @@ function Game(): JSX.Element {
   return (
     <div className="word--container">
       {words.map((word, index) => {
-        return <Word text={word.text} isSubmit={word.isSubmit}></Word>;
+        return (
+          <Word key={index} text={word.text} isSubmit={word.isSubmit}></Word>
+        );
       })}
       <Keyboard enterLetter={enterLetter} />
       {/* <AddWordForm addWord={addWord} /> */}

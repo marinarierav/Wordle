@@ -79,7 +79,7 @@ function Word({ text, isSubmit }: WordInterface): JSX.Element {
     <ul className="letter--container">
       {letters.map((letter, index) => {
         return (
-          <li className="letter-list">
+          <li key={index} className="letter-list">
             <Letter letter={letter.letter} type={letter.type} />
           </li>
         );
