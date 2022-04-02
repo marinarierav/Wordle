@@ -1,5 +1,9 @@
 import { MAX_WORDS } from "..";
-import { LetterInterface, LETTER_CORRECT, LETTER_EXIST } from "../Word/Letter";
+import {
+  LetterInterface,
+  LETTER_CORRECT,
+  LETTER_MISPLACED,
+} from "../Word/Letter";
 
 export function getShareableLink(): string {
   return "marinarierav-worldle.herokuapp.com";
@@ -13,7 +17,7 @@ export function getPrettySquares(wordHistory: LetterInterface[][]) {
       row +=
         letter.type === LETTER_CORRECT
           ? "🟩"
-          : letter.type === LETTER_EXIST
+          : letter.type === LETTER_MISPLACED
           ? "🟨"
           : "⬜";
     });

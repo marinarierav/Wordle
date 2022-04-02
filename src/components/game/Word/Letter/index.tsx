@@ -1,11 +1,11 @@
 export const LETTER_CORRECT = 1;
-export const LETTER_EXIST = 2;
+export const LETTER_MISPLACED = 2;
 export const LETTER_WRONG = 3;
 export const LETTER_UNSUBMITTED = 4;
 
 type LetterType =
   | typeof LETTER_CORRECT
-  | typeof LETTER_EXIST
+  | typeof LETTER_MISPLACED
   | typeof LETTER_UNSUBMITTED
   | typeof LETTER_WRONG;
 
@@ -21,7 +21,7 @@ function Letter({ letter, type }: LetterInterface): JSX.Element {
         "letter " +
         (type === LETTER_CORRECT
           ? "letter--correct"
-          : type === LETTER_EXIST
+          : type === LETTER_MISPLACED
           ? "letter--exist"
           : "")
       }

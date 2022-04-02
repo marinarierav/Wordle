@@ -1,8 +1,11 @@
 import React from "react";
-import Word, { WordInterface } from "./Word";
+import Word from "./Word";
 import GameOverModal from "./GameOverModal";
 import seedrandom from "seedrandom";
 import Keyboard from "./Keyboard";
+import { LetterInterface, LETTER_UNSUBMITTED } from "./Word/Letter";
+import getLettersFromText from "./getLettersFromText";
+import getSubmittedLetters from "./getSubmittedLetters";
 
 const WORDS = [
   //4
@@ -95,18 +98,14 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 export const MAX_WORDS = MAX_LETTERS + 1;
 
+export interface SubmittedLettersInterface {
+  correctLetters: string;
+  misplacedLetters: string;
+  wrongLetters: string;
+}
+
 function Game(): JSX.Element {
   console.log(GROUNDTRUTH);
-  const initialWords = Array(MAX_WORDS)
-    .fill("")
-    .map((text: string) => {
-      return { text, isSubmit: false };
-    });
-
-  const [words, setWords]: [WordInterface[], Function] =
-    React.useState(initialWords);
-  const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
-  console.log("Keyboard: " + words[currentWordIndex].text);
 
   // function submitWord(text: string): void {
   //   if (isSuccess || currentWordIndex === MAX_WORDS) return;
@@ -133,38 +132,76 @@ function Game(): JSX.Element {
   // }
 
   function enterLetter(letter: string): void {
+    const letterObject: LetterInterface = { letter, type: LETTER_UNSUBMITTED };
     // Submit word
-    let newWords: Array<WordInterface> = Array.from(words);
+    let newWords: Array<LetterInterface[]> = Array.from(words);
 
     if (letter === "↩") {
-      if (words[currentWordIndex].text.length !== MAX_LETTERS) return;
-      newWords[currentWordIndex].isSubmit = true;
+      if (currentLetterIndex !== MAX_LETTERS) return;
+
+      const { letters, submittedLetters } = getSubmittedLetters(
+        newWords[currentWordIndex]
+      );
+      addSubmittedLetters(submittedLetters);
+
+      newWords[currentWordIndex] = letters;
+      //addSubmittedLetters(submittedLetters);
+
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
+      setCurrentLetterIndex(0);
       return;
     }
 
     // Backspace
     if (letter === "⌫") {
-      newWords[currentWordIndex].text = newWords[currentWordIndex].text.slice(
-        0,
-        newWords[currentWordIndex].text.length - 1
-      );
+      if (currentLetterIndex === 0) return;
+      newWords[currentWordIndex][currentLetterIndex - 1].letter = "";
       setWords(newWords);
+      setCurrentLetterIndex(currentLetterIndex - 1);
       return;
     }
 
+    if (currentLetterIndex >= MAX_LETTERS) return;
     // Add non-submitted text
-    if (newWords[currentWordIndex].text.length === MAX_LETTERS) {
-      newWords[currentWordIndex].text = newWords[currentWordIndex].text.slice(
-        0,
-        MAX_LETTERS - 1
-      );
-    }
-    newWords[currentWordIndex].text =
-      newWords[currentWordIndex].text.concat(letter);
+    newWords[currentWordIndex][currentLetterIndex] = letterObject;
     setWords(newWords);
+    setCurrentLetterIndex(currentLetterIndex + 1);
   }
+
+  function addSubmittedLetters(newSubmittedLetters: SubmittedLettersInterface) {
+    setSubmittedLetters({
+      correctLetters: submittedLetters.correctLetters.concat(
+        newSubmittedLetters.correctLetters
+      ),
+      misplacedLetters: submittedLetters.misplacedLetters.concat(
+        newSubmittedLetters.misplacedLetters
+      ),
+      wrongLetters: submittedLetters.wrongLetters.concat(
+        newSubmittedLetters.wrongLetters
+      ),
+    });
+  }
+
+  const initialWords = Array(MAX_WORDS)
+    .fill("")
+    .map((text: string) => {
+      return getLettersFromText(text);
+    });
+
+  const [words, setWords]: [LetterInterface[][], Function] =
+    React.useState(initialWords);
+  const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
+  const [currentLetterIndex, setCurrentLetterIndex] = React.useState(0);
+
+  const [submittedLetters, setSubmittedLetters]: [
+    SubmittedLettersInterface,
+    Function
+  ] = React.useState({
+    correctLetters: "",
+    misplacedLetters: "",
+    wrongLetters: "",
+  });
 
   const [isModalOpen, setIsModalOpen] = React.useState(
     dateResolved === seedForToday
@@ -174,11 +211,9 @@ function Game(): JSX.Element {
   return (
     <div className="word--container">
       {words.map((word, index) => {
-        return (
-          <Word key={index} text={word.text} isSubmit={word.isSubmit}></Word>
-        );
+        return <Word key={index} letters={word}></Word>;
       })}
-      <Keyboard enterLetter={enterLetter} />
+      <Keyboard enterLetter={enterLetter} submittedLetters={submittedLetters} />
       {/* <AddWordForm addWord={addWord} /> */}
       <GameOverModal
         isModalOpenInitially={isModalOpen}
