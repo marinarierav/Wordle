@@ -1,16 +1,13 @@
-import React from "react";
-import { MAX_LETTERS } from "..";
 import Letter from "./Letter";
 
-function Keyboard({ addWord }: { addWord: Function }) {
+function Keyboard({ enterLetter }: { enterLetter: Function }): JSX.Element {
   const LetterRow = ({ letters }) => {
-    console.log(letters);
     return (
       <ul className="letter--container">
-        {[...letters].map((letter) => {
+        {[...letters].map((letter, index) => {
           return (
             <li className="letter-list letter-list--keyboard">
-              <Letter letter={letter} addWord={addWord} />
+              <Letter letter={letter} enterLetter={enterLetter} />
             </li>
           );
         })}
@@ -20,7 +17,7 @@ function Keyboard({ addWord }: { addWord: Function }) {
 
   return (
     <ul className="keyboard--container">
-      {["QWERTYUIOP", "ASDFGHJKL", "⌫ZXCVBNM↩"].map((letters) => {
+      {["QWERTYUIOP", "ASDFGHJKL", "⌫ZXCVBNM↩"].map((letters, index) => {
         return (
           <li>
             <LetterRow letters={letters} />

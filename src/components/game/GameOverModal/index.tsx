@@ -10,7 +10,7 @@ import {
   getShareableText,
 } from "./getShareable";
 
-function GameOverModal({ isModalOpenInitially, isSuccess }) {
+function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
   const { wordHistory } = React.useContext(GameContext) as GameContextType;
 
   const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);

@@ -1,7 +1,7 @@
 import React from "react";
 import { MAX_LETTERS } from "../..";
 
-function AddWordForm({ addWord }) {
+function AddWordForm({ addWord }): JSX.Element {
   const [text, setText] = React.useState("");
 
   const handleSubmit = (e) => {

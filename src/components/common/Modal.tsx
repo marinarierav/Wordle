@@ -1,4 +1,4 @@
-function Modal(props) {
+function Modal(props): JSX.Element {
   return (
     <div className="modal">
       <h2>{props.title}</h2>

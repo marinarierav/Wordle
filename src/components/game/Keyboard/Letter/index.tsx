@@ -1,24 +1,20 @@
-import React from "react";
-import { MAX_LETTERS } from "../..";
-import { GameContext, GameContextType } from "../../GameContext";
-
-export const LETTER_CORRECT = 1;
-export const LETTER_EXIST = 2;
-export const LETTER_WRONG = 3;
-
-function Letter({ letter, addWord }: { letter: string; addWord: Function }) {
-  const { currentWord, addCurrentLetter } = React.useContext(
-    GameContext
-  ) as GameContextType;
-
+function Letter({
+  letter,
+  enterLetter,
+}: {
+  letter: string;
+  enterLetter: Function;
+}): JSX.Element {
   const handleSubmit = (e) => {
     e.preventDefault();
-    addCurrentLetter(letter);
-    if (!currentWord) return;
-    if (currentWord.length !== MAX_LETTERS) return;
-    if (/[^a-z]/i.test(currentWord)) return;
 
-    addWord(currentWord.toUpperCase());
+    // if (letter === "↩") {
+    //   if (!currentText) return;
+    //   if (currentText.length !== MAX_LETTERS) return;
+    //   if (/[^a-z]/i.test(currentText)) return;
+    //   setCurrentText({ text: currentText.toUpperCase() });
+    // }
+    enterLetter(letter.toUpperCase());
   };
 
   return (
