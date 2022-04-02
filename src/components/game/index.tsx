@@ -1,5 +1,5 @@
 import React from "react";
-import Word from "./Word";
+import Word, { WordInterface } from "./Word";
 import GameOverModal from "./GameOverModal";
 import seedrandom from "seedrandom";
 import Keyboard from "./Keyboard";
@@ -97,9 +97,16 @@ export const MAX_WORDS = MAX_LETTERS + 1;
 
 function Game(): JSX.Element {
   console.log(GROUNDTRUTH);
-  const [words, setWords] = React.useState(Array(MAX_WORDS).fill(""));
+  const initialWords = Array(MAX_WORDS)
+    .fill("")
+    .map((text: string) => {
+      return { text, isSubmit: false };
+    });
+
+  const [words, setWords]: [WordInterface[], Function] =
+    React.useState(initialWords);
   const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
-  console.log("Keyboard: " + words[currentWordIndex]);
+  console.log("Keyboard: " + words[currentWordIndex].text);
 
   // function submitWord(text: string): void {
   //   if (isSuccess || currentWordIndex === MAX_WORDS) return;
@@ -127,31 +134,36 @@ function Game(): JSX.Element {
 
   function enterLetter(letter: string): void {
     // Submit word
+    let newWords: Array<WordInterface> = Array.from(words);
+
     if (letter === "↩") {
-      if (words[currentWordIndex].length !== MAX_LETTERS) return;
+      if (words[currentWordIndex].text.length !== MAX_LETTERS) return;
+      newWords[currentWordIndex].isSubmit = true;
+      setWords(newWords);
+      setCurrentWordIndex(currentWordIndex + 1);
       return;
     }
 
     // Backspace
-    const newWords: Array<string> = words;
     if (letter === "⌫") {
-      newWords[currentWordIndex] = newWords[currentWordIndex].slice(
+      newWords[currentWordIndex].text = newWords[currentWordIndex].text.slice(
         0,
-        newWords[currentWordIndex].length - 1
+        newWords[currentWordIndex].text.length - 1
       );
-      setWords(Array.from(newWords));
+      setWords(newWords);
       return;
     }
 
     // Add non-submitted text
-    if (newWords[currentWordIndex].length === MAX_LETTERS) {
-      newWords[currentWordIndex] = newWords[currentWordIndex].slice(
+    if (newWords[currentWordIndex].text.length === MAX_LETTERS) {
+      newWords[currentWordIndex].text = newWords[currentWordIndex].text.slice(
         0,
         MAX_LETTERS - 1
       );
     }
-    newWords[currentWordIndex] = newWords[currentWordIndex].concat(letter);
-    setWords(Array.from(newWords));
+    newWords[currentWordIndex].text =
+      newWords[currentWordIndex].text.concat(letter);
+    setWords(newWords);
   }
 
   const [isModalOpen, setIsModalOpen] = React.useState(
@@ -161,12 +173,8 @@ function Game(): JSX.Element {
 
   return (
     <div className="word--container">
-      {console.log("GameWords:")}
-      {console.log(words)}
       {words.map((word, index) => {
-        console.log("GameWord:");
-        console.log(word);
-        return <Word text={word} isSubmit={false}></Word>;
+        return <Word text={word.text} isSubmit={word.isSubmit}></Word>;
       })}
       <Keyboard enterLetter={enterLetter} />
       {/* <AddWordForm addWord={addWord} /> */}

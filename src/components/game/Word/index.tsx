@@ -14,14 +14,11 @@ export interface WordInterface {
   isSubmit: boolean;
 }
 
-function Word({ text }: WordInterface): JSX.Element {
-  const setLettersFromText = () => {
-    //console.log("WORD: " + text);
+function Word({ text, isSubmit }: WordInterface): JSX.Element {
+  const getLettersFromUnsubmittedText = () => {
     let newLetters: LetterInterface[] = [...text].map((letter, index) => {
       return { letter: letter, type: LETTER_UNSUBMITTED };
     });
-    // console.log("WORD Letters: ");
-    // console.log(newLetters);
 
     const fillSpaces = Array(MAX_LETTERS - newLetters.length).fill({
       letter: "",
@@ -31,51 +28,52 @@ function Word({ text }: WordInterface): JSX.Element {
     return newLetters;
   };
 
-  const letters = setLettersFromText();
+  const countLetters = (letters = []) => {
+    let letterCount: { [index: string]: number } = {};
+    letters.forEach((letter) => {
+      letterCount[letter] = (
+        GROUNDTRUTH.match(new RegExp(letter, "g")) || []
+      ).length;
+    });
+    return letterCount;
+  };
 
-  // const countLetters = (letters = []) => {
-  //   let letterCount: { [index: string]: number } = {};
-  //   letters.forEach((letter) => {
-  //     letterCount[letter] = (
-  //       GROUNDTRUTH.match(new RegExp(letter, "g")) || []
-  //     ).length;
-  //   });
-  //   return letterCount;
-  // };
+  const getSubmittedLetters = () => {
+    if (text.length <= 0) return;
 
-  // React.useEffect(() => {
-  //   if (text.length <= 0) return;
+    let letterCount = countLetters([...new Set([...text])]);
 
-  //   let letterCount = countLetters([...new Set([...text])]);
+    // Set correct letters
+    let letters: LetterInterface[] = [...text].map((letter, index) => {
+      const isCorrect = letter === GROUNDTRUTH[index];
 
-  //   // Set correct letters
-  //   let letters: LetterInterface[] = [...text].map((letter, index) => {
-  //     const isCorrect = letter === GROUNDTRUTH[index];
+      if (isCorrect) {
+        letterCount[letter] -= 1;
+      }
+      const type = isCorrect ? LETTER_CORRECT : LETTER_WRONG;
 
-  //     if (isCorrect) {
-  //       letterCount[letter] -= 1;
-  //     }
-  //     const type = isCorrect ? LETTER_CORRECT : LETTER_WRONG;
+      return { letter: letter, type: type };
+    });
 
-  //     return { letter: letter, type: type };
-  //   });
+    // Set misplaced letters
+    letters = letters.map((letter, index) => {
+      if (letter.type === LETTER_CORRECT) return letter;
 
-  //   // Set misplaced letters
-  //   letters = letters.map((letter, index) => {
-  //     if (letter.type === LETTER_CORRECT) return letter;
+      const isExisting = letterCount[letter.letter] > 0;
+      if (isExisting) {
+        letterCount[letter.letter] -= 1;
+      }
+      const type = isExisting ? LETTER_EXIST : LETTER_WRONG;
 
-  //     const isExisting = letterCount[letter.letter] > 0;
-  //     if (isExisting) {
-  //       letterCount[letter.letter] -= 1;
-  //     }
-  //     const type = isExisting ? LETTER_EXIST : LETTER_WRONG;
+      return { letter: letter.letter, type: type };
+    });
 
-  //     return { letter: letter.letter, type: type };
-  //   });
+    return letters;
+  };
 
-  //   addWord(letters);
-  //   setLetters(letters);
-  // }, [text]);
+  const letters = isSubmit
+    ? getSubmittedLetters()
+    : getLettersFromUnsubmittedText();
 
   return (
     <ul className="letter--container">
