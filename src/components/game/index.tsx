@@ -6,6 +6,7 @@ import Keyboard from "./Keyboard";
 import { LetterInterface, LETTER_UNSUBMITTED } from "./Word/Letter";
 import getLettersFromText from "./getLettersFromText";
 import getSubmittedLetters from "./getSubmittedLetters";
+import getTextFromLetters from "./getTextFromLetters";
 
 const WORDS = [
   //4
@@ -78,14 +79,6 @@ const WORDS = [
   "Zambia",
 ];
 
-const dateResolved = localStorage.getItem("dateResolved");
-const currentCombo = localStorage.getItem("currentCombo");
-const totalWins = localStorage.getItem("totalWins");
-//localStorage.clear();
-console.log(currentCombo);
-console.log(totalWins);
-console.log(dateResolved);
-
 const seedForToday = Intl.DateTimeFormat("es-ES", {
   year: "numeric",
   month: "numeric",
@@ -98,6 +91,16 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 export const MAX_WORDS = MAX_LETTERS + 1;
 
+const dateResolved = localStorage.getItem("dateResolved");
+const datePlayed = localStorage.getItem("datePlayed");
+const currentCombo = localStorage.getItem("currentCombo");
+const totalWins = localStorage.getItem("totalWins");
+//localStorage.clear();
+//console.log(currentCombo);
+//console.log(totalWins);
+//console.log(dateResolved);
+const alreadyPlayedToday = datePlayed === seedForToday;
+
 export interface SubmittedLettersInterface {
   correctLetters: string;
   misplacedLetters: string;
@@ -107,31 +110,33 @@ export interface SubmittedLettersInterface {
 function Game(): JSX.Element {
   console.log(GROUNDTRUTH);
 
-  // function submitWord(text: string): void {
-  //   if (isSuccess || currentWordIndex === MAX_WORDS) return;
+  function handleSubmit(): void {
+    if (isSuccess || currentWordIndex === MAX_WORDS) return;
 
-  //   addText(text);
-  //   setCurrentWordIndex(currentWordIndex + 1);
+    // Save currently submitted words
+    localStorage.setItem("currentWords", JSON.stringify(words));
 
-  //   if (text === GROUNDTRUTH) {
-  //     if (dateResolved !== seedForToday) {
-  //       localStorage.setItem("isResolved", "1");
-  //       localStorage.setItem("dateResolved", seedForToday);
-  //       localStorage.setItem(
-  //         "currentCombo",
-  //         `${parseInt(currentCombo || "0") + 1}`
-  //       );
-  //       localStorage.setItem("totalWins", `${parseInt(totalWins || "0") + 1}`);
-  //     }
-  //     setSuccess(true);
-  //     setIsModalOpen(true);
-  //   } else if (currentWordIndex + 1 === MAX_WORDS) {
-  //     localStorage.setItem("currentCombo", "0");
-  //     setIsModalOpen(true);
-  //   }
-  // }
+    if (getTextFromLetters(words[currentWordIndex]) === GROUNDTRUTH) {
+      if (dateResolved !== seedForToday) {
+        localStorage.setItem("dateResolved", seedForToday);
+        localStorage.setItem("datePlayed", seedForToday);
+        localStorage.setItem(
+          "currentCombo",
+          `${parseInt(currentCombo || "0") + 1}`
+        );
+        localStorage.setItem("totalWins", `${parseInt(totalWins || "0") + 1}`);
+      }
+      setSuccess(true);
+      setIsModalOpen(true);
+    } else if (currentWordIndex + 1 === MAX_WORDS) {
+      localStorage.setItem("currentCombo", "0");
+      localStorage.setItem("datePlayed", seedForToday);
+      setIsModalOpen(true);
+    }
+  }
 
   function enterLetter(letter: string): void {
+    if (alreadyPlayedToday) return;
     const letterObject: LetterInterface = { letter, type: LETTER_UNSUBMITTED };
     // Submit word
     let newWords: Array<LetterInterface[]> = Array.from(words);
@@ -139,17 +144,18 @@ function Game(): JSX.Element {
     if (letter === "↩") {
       if (currentLetterIndex !== MAX_LETTERS) return;
 
+      handleSubmit();
+
       const { letters, submittedLetters } = getSubmittedLetters(
         newWords[currentWordIndex]
       );
-      addSubmittedLetters(submittedLetters);
-
       newWords[currentWordIndex] = letters;
-      //addSubmittedLetters(submittedLetters);
+      addSubmittedLetters(submittedLetters);
 
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentLetterIndex(0);
+
       return;
     }
 
@@ -183,14 +189,24 @@ function Game(): JSX.Element {
     });
   }
 
-  const initialWords = Array(MAX_WORDS)
-    .fill("")
-    .map((text: string) => {
-      return getLettersFromText(text);
-    });
+  function generateEmptyWords() {
+    return Array(MAX_WORDS)
+      .fill("")
+      .map((text: string) => {
+        return getLettersFromText(text);
+      });
+  }
 
-  const [words, setWords]: [LetterInterface[][], Function] =
-    React.useState(initialWords);
+  const alreadySubmittedWords = JSON.parse(
+    localStorage.getItem("currentWords")
+  );
+
+  console.log("alreadySubmittedWords");
+  console.log(alreadySubmittedWords);
+
+  const [words, setWords]: [LetterInterface[][], Function] = React.useState(
+    alreadySubmittedWords || generateEmptyWords()
+  );
   const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
   const [currentLetterIndex, setCurrentLetterIndex] = React.useState(0);
 
@@ -204,7 +220,7 @@ function Game(): JSX.Element {
   });
 
   const [isModalOpen, setIsModalOpen] = React.useState(
-    dateResolved === seedForToday
+    datePlayed === seedForToday
   );
   const [isSuccess, setSuccess] = React.useState(dateResolved === seedForToday);
 

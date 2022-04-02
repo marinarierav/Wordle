@@ -1,4 +1,5 @@
 import { GROUNDTRUTH, SubmittedLettersInterface } from ".";
+import getTextFromLetters from "./getTextFromLetters";
 import {
   LetterInterface,
   LETTER_CORRECT,
@@ -20,10 +21,7 @@ export default function getSubmittedLetters(submittedWord: LetterInterface[]): {
   letters: LetterInterface[];
   submittedLetters: SubmittedLettersInterface;
 } {
-  let text = "";
-  submittedWord.forEach((letter) => {
-    text += letter.letter;
-  });
+  const text = getTextFromLetters(submittedWord);
 
   if (text.length <= 0) return;
 
