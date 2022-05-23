@@ -19,7 +19,7 @@ function countLetters(letters = []) {
 
 export default function getSubmittedLetters(submittedWord: LetterInterface[]): {
   letters: LetterInterface[];
-  submittedLetters: SubmittedLettersInterface;
+  classifiedLetters: SubmittedLettersInterface;
 } {
   const text = getTextFromLetters(submittedWord);
 
@@ -60,6 +60,6 @@ export default function getSubmittedLetters(submittedWord: LetterInterface[]): {
   });
   return {
     letters,
-    submittedLetters: { correctLetters, misplacedLetters, wrongLetters },
+    classifiedLetters: { correctLetters, misplacedLetters, wrongLetters },
   };
 }

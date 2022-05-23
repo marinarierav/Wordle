@@ -148,11 +148,13 @@ function Game(): JSX.Element {
 
       handleSubmit();
 
-      const { letters, submittedLetters } = getSubmittedLetters(
+      const { letters, classifiedLetters } = getSubmittedLetters(
         newWords[currentWordIndex]
       );
       newWords[currentWordIndex] = letters;
-      addSubmittedLetters(submittedLetters);
+      setSubmittedLetters(
+        addSubmittedLetters(submittedLetters, classifiedLetters)
+      );
 
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
@@ -177,8 +179,11 @@ function Game(): JSX.Element {
     setCurrentLetterIndex(currentLetterIndex + 1);
   }
 
-  function addSubmittedLetters(newSubmittedLetters: SubmittedLettersInterface) {
-    setSubmittedLetters({
+  function addSubmittedLetters(
+    submittedLetters: SubmittedLettersInterface,
+    newSubmittedLetters: SubmittedLettersInterface
+  ) {
+    return {
       correctLetters: submittedLetters.correctLetters.concat(
         newSubmittedLetters.correctLetters
       ),
@@ -188,7 +193,7 @@ function Game(): JSX.Element {
       wrongLetters: submittedLetters.wrongLetters.concat(
         newSubmittedLetters.wrongLetters
       ),
-    });
+    };
   }
 
   function generateEmptyWords() {
@@ -209,25 +214,37 @@ function Game(): JSX.Element {
   //console.log("alreadySubmittedWords");
   //console.log(alreadySubmittedWords);
 
-  function generateWords(submittedPlainWords) {
+  function generateWordsAndLetters(submittedPlainWords) {
     if (!submittedPlainWords) {
       return null;
     }
     let generatedWords = [];
+    let generatedLetters = {
+      correctLetters: "",
+      misplacedLetters: "",
+      wrongLetters: "",
+    };
     submittedPlainWords.forEach((submittedWord, index) => {
       const result = getSubmittedLetters(submittedWord);
       if (!result) {
         generatedWords.push(submittedWord);
         return;
       }
-      const { letters } = result;
+      const { letters, classifiedLetters } = result;
       generatedWords.push(letters);
+      generatedLetters = addSubmittedLetters(
+        generatedLetters,
+        classifiedLetters
+      );
     });
-    return generatedWords;
+    return { generatedWords, generatedLetters };
   }
+  const { generatedWords, generatedLetters } = generateWordsAndLetters(
+    alreadySubmittedWords
+  );
 
   const [words, setWords]: [LetterInterface[][], Function] = React.useState(
-    generateWords(alreadySubmittedWords) || generateEmptyWords()
+    generatedWords || generateEmptyWords()
   );
   const [currentWordIndex, setCurrentWordIndex] =
     React.useState(storedWordIndex);
@@ -236,11 +253,7 @@ function Game(): JSX.Element {
   const [submittedLetters, setSubmittedLetters]: [
     SubmittedLettersInterface,
     Function
-  ] = React.useState({
-    correctLetters: "",
-    misplacedLetters: "",
-    wrongLetters: "",
-  });
+  ] = React.useState(generatedLetters);
 
   const [isModalOpen, setIsModalOpen] = React.useState(
     datePlayed === seedForToday
