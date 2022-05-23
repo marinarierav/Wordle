@@ -96,9 +96,10 @@ const datePlayed = localStorage.getItem("datePlayed");
 const currentCombo = localStorage.getItem("currentCombo");
 const totalWins = localStorage.getItem("totalWins");
 //localStorage.clear();
-//console.log(currentCombo);
-//console.log(totalWins);
-//console.log(dateResolved);
+//console.log("currentCombo: " + currentCombo);
+//console.log("totalWins: " + totalWins);
+//console.log("dateResolved: " + dateResolved);
+//console.log("datePlayed: " + datePlayed);
 const alreadyPlayedToday = datePlayed === seedForToday;
 
 export interface SubmittedLettersInterface {
@@ -115,6 +116,7 @@ function Game(): JSX.Element {
 
     // Save currently submitted words
     localStorage.setItem("currentWords", JSON.stringify(words));
+    localStorage.setItem("currentWordIndex", `${currentWordIndex + 1}`);
 
     if (getTextFromLetters(words[currentWordIndex]) === GROUNDTRUTH) {
       if (dateResolved !== seedForToday) {
@@ -200,14 +202,35 @@ function Game(): JSX.Element {
   const alreadySubmittedWords = JSON.parse(
     localStorage.getItem("currentWords")
   );
+  const storedWordIndex = parseInt(
+    localStorage.getItem("currentWordIndex") || "0"
+  );
+  //console.log("storedWordIndex: " + storedWordIndex);
+  //console.log("alreadySubmittedWords");
+  //console.log(alreadySubmittedWords);
 
-  console.log("alreadySubmittedWords");
-  console.log(alreadySubmittedWords);
+  function generateWords(submittedPlainWords) {
+    if (!submittedPlainWords) {
+      return null;
+    }
+    let generatedWords = [];
+    submittedPlainWords.forEach((submittedWord, index) => {
+      const result = getSubmittedLetters(submittedWord);
+      if (!result) {
+        generatedWords.push(submittedWord);
+        return;
+      }
+      const { letters } = result;
+      generatedWords.push(letters);
+    });
+    return generatedWords;
+  }
 
   const [words, setWords]: [LetterInterface[][], Function] = React.useState(
-    alreadySubmittedWords || generateEmptyWords()
+    generateWords(alreadySubmittedWords) || generateEmptyWords()
   );
-  const [currentWordIndex, setCurrentWordIndex] = React.useState(0);
+  const [currentWordIndex, setCurrentWordIndex] =
+    React.useState(storedWordIndex);
   const [currentLetterIndex, setCurrentLetterIndex] = React.useState(0);
 
   const [submittedLetters, setSubmittedLetters]: [
