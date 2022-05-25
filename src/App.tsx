@@ -18,9 +18,7 @@ function App() {
           <h2>A Wordle of the World!</h2>
         </div>
         <div className="content game--container">
-          <p className="game--box">
-            Mixed countries, different difficulty levels...
-          </p>
+          <p className="game--box">A different country every day</p>
           <p className="game--box description">
             Can you guess which country{" "}
             <span className="description--highlight">
