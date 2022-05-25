@@ -51,7 +51,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
           onConfirmText="Ok"
           title={isSuccess ? "Very good!" : "Ooops"}
         >
-          <p>The country was {GROUNDTRUTH}</p>
+          <p>The word was {GROUNDTRUTH}</p>
           <p>
             Current streak:{" "}
             <span className="share">

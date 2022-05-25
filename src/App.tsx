@@ -9,20 +9,18 @@ function App() {
           <ul className="title--container">
             <li className="title--box"></li>
             <li>
-              <h1>Worldle 🌎</h1>
+              <h1>Wordle</h1>
             </li>
             <li className="title--box">
               <p>(English)</p>
             </li>
           </ul>
-          <h2>A Wordle of the World!</h2>
+          <h2>The popular daily word game</h2>
         </div>
         <div className="content game--container">
-          <p className="game--box">
-            Mixed countries, different difficulty levels...
-          </p>
+          <p className="game--box">A different word every day</p>
           <p className="game--box description">
-            Can you guess which country{" "}
+            Can you guess which word{" "}
             <span className="description--highlight">
               has {MAX_LETTERS} letters
             </span>

@@ -1,6 +1,6 @@
-# Worldle
+# Wordle
 
-NO, it's not a typo: it's a Wordle of the World! Can you guess the country in the world?
+The popular daily word game
 
 ## Getting Started with Create React App
 
