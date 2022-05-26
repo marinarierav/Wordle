@@ -37,6 +37,8 @@ function Letter({
             ? "letter--correct"
             : type === LETTER_MISPLACED
             ? "letter--exist"
+            : type === LETTER_WRONG
+            ? "letter--wrong"
             : "")
         }
         onClick={handleSubmit}

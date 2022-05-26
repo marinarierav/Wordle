@@ -178,6 +178,10 @@ main {
   background-color: rgb(243, 231, 124);
 }
 
+.letter--wrong {
+  background-color: rgb(172, 172, 172);
+}
+
 .word--container {
   flex-grow: 1;
   display: flex;
