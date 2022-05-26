@@ -27,12 +27,12 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 export const MAX_WORDS = MAX_LETTERS + 1;
 
+localStorage.clear();
 const dateLastSuccess = localStorage.getItem("dateLastSuccess");
 const dateLastFinish = localStorage.getItem("dateLastFinish");
 const dateLastParticipation = localStorage.getItem("dateLastParticipation");
 const currentCombo = localStorage.getItem("currentCombo");
 const totalWins = localStorage.getItem("totalWins");
-//localStorage.clear();
 //console.log("currentCombo: " + currentCombo);
 //console.log("totalWins: " + totalWins);
 console.log("dateLastSuccess: " + dateLastSuccess);
@@ -51,15 +51,13 @@ console.log("TODAY: " + seedForToday);
 console.log(GROUNDTRUTH);
 
 function Game(): JSX.Element {
-  function handleSubmit(): void {
-    if (isSuccess || currentWordIndex === MAX_WORDS) return;
-
+  function handleSubmit(newWords: LetterInterface[][]): void {
     // Save currently submitted words
-    localStorage.setItem("currentWords", JSON.stringify(words));
+    localStorage.setItem("currentWords", JSON.stringify(newWords));
     localStorage.setItem("currentWordIndex", `${currentWordIndex + 1}`);
     localStorage.setItem("dateLastParticipation", seedForToday);
 
-    if (getTextFromLetters(words[currentWordIndex]) === GROUNDTRUTH) {
+    if (getTextFromLetters(newWords[currentWordIndex]) === GROUNDTRUTH) {
       if (dateLastSuccess !== seedForToday) {
         localStorage.setItem("dateLastSuccess", seedForToday);
         localStorage.setItem("dateLastFinish", seedForToday);
@@ -87,19 +85,20 @@ function Game(): JSX.Element {
     if (letter === "↩") {
       if (currentLetterIndex !== MAX_LETTERS) return;
 
-      handleSubmit();
+      if (isSuccess || currentWordIndex === MAX_WORDS) return;
 
       const { letters, classifiedLetters } = getSubmittedLetters(
         newWords[currentWordIndex]
       );
       newWords[currentWordIndex] = letters;
-      setSubmittedLetters(
-        addSubmittedLetters(submittedLetters, classifiedLetters)
-      );
 
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentLetterIndex(0);
+      setSubmittedLetters(
+        addSubmittedLetters(submittedLetters, classifiedLetters)
+      );
+      handleSubmit(newWords);
 
       return;
     }
