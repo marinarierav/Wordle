@@ -27,7 +27,7 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 export const MAX_WORDS = MAX_LETTERS + 1;
 
-localStorage.clear();
+//localStorage.clear();
 const dateLastSuccess = localStorage.getItem("dateLastSuccess");
 const dateLastFinish = localStorage.getItem("dateLastFinish");
 const dateLastParticipation = localStorage.getItem("dateLastParticipation");
