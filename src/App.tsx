@@ -29,9 +29,8 @@ function App() {
           <Game></Game>
         </div>
         <div className="content">
-          <p>Creator: marinarierav</p>
           <a href="https://github.com/marinarierav">
-            <button className="btn">@GitHub</button>
+            <button className="btn">Follow me on GitHub</button>
           </a>
         </div>
       </main>
