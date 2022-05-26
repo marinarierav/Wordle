@@ -6,7 +6,7 @@ import {
 } from "../Word/Letter";
 
 export function getShareableLink(): string {
-  return "marinarierav-worldle.herokuapp.com";
+  return "marinarierav-wordle.herokuapp.com";
 }
 
 export function getPrettySquares(wordHistory: LetterInterface[][]) {
@@ -31,7 +31,7 @@ export function getShareableText(
   isSuccess: boolean
 ): string {
   return (
-    `#Worldle (English) 1º ${
+    `#Wordle (English) 1º ${
       isSuccess ? wordHistory.length : "X"
     }/${MAX_WORDS}\r\n` + getPrettySquares(wordHistory)
   );
