@@ -248,6 +248,9 @@ ul {
   border-width: 0.5px;
   border-color: grey;
   border-radius: 4px;
+  font-size: larger;
+  font-family: sans-serif;
+  padding: 8px 5px;
 }
 
 .keyboard::placeholder {
