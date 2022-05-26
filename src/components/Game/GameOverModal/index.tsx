@@ -3,7 +3,6 @@ import { WhatsappIcon, WhatsappShareButton } from "react-share";
 import Backdrop from "../../common/Backdrop";
 import Modal from "../../common/Modal";
 import { GROUNDTRUTH } from "..";
-import { GameContext, GameContextType } from "../GameContext";
 import {
   getFullShareable,
   getShareableLink,
@@ -13,9 +12,10 @@ import { LetterInterface } from "../Word/Letter";
 
 function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
   const currentWordIndex = parseInt(localStorage.getItem("currentWordIndex"));
-  const currentWords: LetterInterface[][] = JSON.parse(
+  let currentWords: LetterInterface[][] = JSON.parse(
     localStorage.getItem("currentWords")
-  ).slice(0, currentWordIndex);
+  );
+  currentWords = currentWords ? currentWords.slice(0, currentWordIndex) : [];
 
   const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);
 
