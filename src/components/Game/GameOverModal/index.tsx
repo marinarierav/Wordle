@@ -51,8 +51,10 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
         <Modal
           onCancel={reloadWindow}
           onCancelText="Retry"
+          onCancelExtraClasses="hidden"
           onConfirm={closeModalHandler}
-          onConfirmText="Ok"
+          onConfirmText="Ok 👍"
+          onConfirmExtraClasses="btn--alt share--confirm"
           title={isSuccess ? "Very good!" : "Ooops"}
         >
           <p>The word was {GROUNDTRUTH}</p>
@@ -81,10 +83,11 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
             </li>
             <li>
               <button className="btn share--button" onClick={copy}>
-                {!copied ? "Copy 📋" : "Copied!✅"}
+                {!copied ? "Copy 📋" : "Copied! ✅"}
               </button>
             </li>
           </ul>
+          <p className="share--come-back">Come back tomorrow for more...</p>
         </Modal>
       )}
       {isModalOpen && <Backdrop onClick={closeModalHandler} />}{" "}
