@@ -8,6 +8,10 @@ import getLettersFromText from "./getLettersFromText";
 import getSubmittedLetters from "./getSubmittedLetters";
 import getTextFromLetters from "./getTextFromLetters";
 import { data5letters } from "./data/5letters";
+import {
+  isValidateLanguageWordEnabled,
+  validateLanguageWord,
+} from "./ValidLanguageWordButton";
 
 const WORDS = [
   //5
@@ -50,7 +54,7 @@ export interface SubmittedLettersInterface {
 console.log("TODAY: " + seedForToday);
 console.log(GROUNDTRUTH);
 
-function Game(): JSX.Element {
+function Game(props): JSX.Element {
   function handleSubmit(newWords: LetterInterface[][]): void {
     // Save currently submitted words
     localStorage.setItem("currentWords", JSON.stringify(newWords));
@@ -88,16 +92,28 @@ function Game(): JSX.Element {
       if (isSuccess || currentWordIndex === MAX_WORDS) return;
 
       const { letters, classifiedLetters } = getSubmittedLetters(
-        newWords[currentWordIndex]
+        words[currentWordIndex]
       );
-      newWords[currentWordIndex] = letters;
 
+      console.log(isValidateLanguageWordEnabled());
+      if (isValidateLanguageWordEnabled()) {
+        const isValidLanguageWord = validateLanguageWord(
+          getTextFromLetters(letters)
+        );
+        if (!isValidLanguageWord) {
+          setIsValidLanguageWord(false);
+          return;
+        }
+      }
+
+      newWords[currentWordIndex] = letters;
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentLetterIndex(0);
       setSubmittedLetters(
         addSubmittedLetters(submittedLetters, classifiedLetters)
       );
+      setIsValidLanguageWord(true);
       handleSubmit(newWords);
 
       return;
@@ -202,10 +218,17 @@ function Game(): JSX.Element {
     dateLastSuccess === seedForToday
   );
 
+  const [isValidLanguageWord, setIsValidLanguageWord]: [boolean, Function] =
+    React.useState(true);
+
   return (
     <div className="word--container">
       {words.map((word, index) => {
-        return <Word key={index} letters={word}></Word>;
+        const extraClass =
+          !isValidLanguageWord && currentWordIndex === index
+            ? "word--mispelled"
+            : "";
+        return <Word key={index} letters={word} extraClass={extraClass}></Word>;
       })}
       <Keyboard enterLetter={enterLetter} submittedLetters={submittedLetters} />
       {/* <AddWordForm addWord={addWord} /> */}
