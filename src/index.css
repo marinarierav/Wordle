@@ -195,6 +195,13 @@ main {
   padding-top: 0.5rem;
 }
 
+.word--mispelled {
+  color: red;
+  border-color: red;
+  border-width: 2px;
+  border-style: solid;
+}
+
 ul {
   list-style-type: none;
 }

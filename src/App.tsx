@@ -1,5 +1,6 @@
 import Game, { MAX_LETTERS } from "./components/Game";
 import GameContextProvider from "./components/Game/GameContext";
+import ValidLanguageWordButton from "./components/Game/ValidLanguageWordButton";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             ?
           </p>
           <Game></Game>
+          <ValidLanguageWordButton></ValidLanguageWordButton>
         </div>
         <div className="content">
           <a href="https://github.com/marinarierav">
