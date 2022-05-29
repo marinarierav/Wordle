@@ -27,7 +27,7 @@ function Wordle() {
           </span>
           ?
         </p>
-        <Game></Game>
+        <Game flavor={"classic"}></Game>
       </div>
       <div className="content">
         <a href="https://github.com/marinarierav">

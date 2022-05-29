@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Disney from "./routes/disney";
 import Hogwarts from "./routes/hogwarts";
+import Worldle from "./routes/worldle";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
         <Route path="/" element={<App />} />
         <Route path="disney" element={<Disney />} />
         <Route path="hogwarts" element={<Hogwarts />} />
+        <Route path="worldle" element={<Worldle />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
