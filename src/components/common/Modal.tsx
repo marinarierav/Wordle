@@ -1,6 +1,6 @@
 function Modal(props): JSX.Element {
   return (
-    <div className="modal">
+    <div className={`modal ${props.extraClass}`}>
       <h2>{props.title}</h2>
       {props.children}
       <button

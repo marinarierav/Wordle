@@ -222,20 +222,27 @@ function Game(props): JSX.Element {
     React.useState(true);
 
   return (
-    <div className="word--container">
-      {words.map((word, index) => {
-        const extraClass =
-          !isValidLanguageWord && currentWordIndex === index
-            ? "word--mispelled"
-            : "";
-        return <Word key={index} letters={word} extraClass={extraClass}></Word>;
-      })}
-      <Keyboard enterLetter={enterLetter} submittedLetters={submittedLetters} />
-      {/* <AddWordForm addWord={addWord} /> */}
+    <div>
       <GameOverModal
         isModalOpenInitially={isModalOpen}
         isSuccess={isSuccess}
       ></GameOverModal>
+      <div className="word--container">
+        {words.map((word, index) => {
+          const extraClass =
+            !isValidLanguageWord && currentWordIndex === index
+              ? "word--mispelled"
+              : "";
+          return (
+            <Word key={index} letters={word} extraClass={extraClass}></Word>
+          );
+        })}
+        <Keyboard
+          enterLetter={enterLetter}
+          submittedLetters={submittedLetters}
+        />
+        {/* <AddWordForm addWord={addWord} /> */}
+      </div>
     </div>
   );
 }
