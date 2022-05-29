@@ -55,6 +55,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
           onConfirm={closeModalHandler}
           onConfirmText="Ok 👍"
           onConfirmExtraClasses="btn--alt share--confirm"
+          extraClass="game-over"
           title={isSuccess ? "Very good!" : "Ooops"}
         >
           <p>The word was {GROUNDTRUTH}</p>

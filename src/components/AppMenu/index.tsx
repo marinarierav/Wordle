@@ -39,6 +39,7 @@ function AppMenu({ isModalOpenInitially }): JSX.Element {
           onConfirm={closeModalHandler}
           onConfirmText="Back to game"
           onConfirmExtraClasses="btn--alt share--confirm"
+          extraClass="menu"
           title={"Settings"}
         >
           <ValidLanguageWordButton></ValidLanguageWordButton>
@@ -53,7 +54,7 @@ function AppMenu({ isModalOpenInitially }): JSX.Element {
             <li>In yellow: Letter is present but misplaced.</li>
             <li>In white: Letter is not present.</li>
           </ul>
-          <p>Come here every day for a different puzzle!</p>
+          <p>Come back every day for a different puzzle!</p>
           <p className="menu--separator">***</p>
           <p className="share">Invite your friends!</p>
           <ul className="share--container">

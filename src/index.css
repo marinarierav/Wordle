@@ -166,11 +166,23 @@ main {
   background-color: white;
   padding: 1rem;
   text-align: center;
-  width: 30rem;
   z-index: 10;
+
+  top: 50%;
+  transform: translateY(-50%);
   position: fixed;
-  top: 20vh;
-  left: calc(50% - 15rem);
+}
+
+.game-over {
+  margin-left: 0px;
+  width: 19.4rem;
+  margin-right: 1.3rem;
+}
+
+.menu {
+  margin-left: 0px;
+  max-width: 21.4rem;
+  margin-right: 0.3rem;
 }
 
 .backdrop {
