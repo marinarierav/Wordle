@@ -61,7 +61,7 @@ function AppMenu({ isModalOpenInitially }): JSX.Element {
             <li className="">
               <WhatsappShareButton
                 url={getShareableLink()}
-                title={"Can you solve this?"}
+                title={"Can you solve this?\r\n"}
               >
                 <WhatsappIcon size={32} round={true}></WhatsappIcon>
               </WhatsappShareButton>
