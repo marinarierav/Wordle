@@ -7,7 +7,6 @@ import { LetterInterface, LETTER_UNSUBMITTED } from "./Word/Letter";
 import getLettersFromText from "./getLettersFromText";
 import getSubmittedLetters from "./getSubmittedLetters";
 import getTextFromLetters from "./getTextFromLetters";
-import { data5letters } from "./data/5letters";
 import {
   isValidateLanguageWordEnabled,
   validateLanguageWord,
