@@ -46,7 +46,7 @@ function AppMenu({ isModalOpenInitially }): JSX.Element {
           <p className="menu--separator">***</p>
           <p className="share">How it works?</p>
           <p className="">
-            You have 6 attemps to guess the 5-letter daily word. Use the
+            You have 6 attempts to guess the 5-letter daily word. Use the
             keyboard to enter a word. Once submitted, you will see:
           </p>
           <ul className="tutorial--list">
