@@ -302,6 +302,12 @@ function Game(props): JSX.Element {
             <Word key={index} letters={word} extraClass={extraClass}></Word>
           );
         })}
+        <p
+          className={`alert--not-found ${isValidLanguageWord ? "hidden" : ""}`}
+        >
+          <span className="alert--not-found--icon">⚠️</span> Word not found! Try
+          another
+        </p>
         <Keyboard
           enterLetter={enterLetter}
           submittedLetters={submittedLetters}

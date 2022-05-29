@@ -50,9 +50,25 @@ function AppMenu({ isModalOpenInitially }): JSX.Element {
             keyboard to enter a word. Once submitted, you will see:
           </p>
           <ul className="tutorial--list">
-            <li>In green: Letter is present and correctly placed.</li>
-            <li>In yellow: Letter is present but misplaced.</li>
-            <li>In white: Letter is not present.</li>
+            <li>
+              In{" "}
+              <span className="tutorial--color tutorial--color-green">
+                green
+              </span>
+              : Letter is present and correctly placed.
+            </li>
+            <li>
+              In{" "}
+              <span className="tutorial--color tutorial--color-yellow">
+                yellow
+              </span>
+              : Letter is present but misplaced.
+            </li>
+            <li>
+              In{" "}
+              <span className="tutorial--color tutorial--color-gray">gray</span>
+              : Letter is not present.
+            </li>
           </ul>
           <p>Come back every day for a different puzzle!</p>
           <p className="menu--separator">***</p>
