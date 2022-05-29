@@ -356,6 +356,23 @@ ul {
   list-style-type: circle;
 }
 
+.tutorial--color {
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    1px 1px 0 #fff;
+}
+
+.tutorial--color-green {
+  background-color: rgb(159, 226, 133);
+}
+
+.tutorial--color-yellow {
+  background-color: rgb(243, 231, 124);
+}
+
+.tutorial--color-gray {
+  background-color: rgb(172, 172, 172);
+}
+
 p,
 a {
   margin-block-start: 0.5rem;
