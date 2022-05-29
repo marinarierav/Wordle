@@ -7,6 +7,11 @@ import { LetterInterface, LETTER_UNSUBMITTED } from "./Word/Letter";
 import getLettersFromText from "./getLettersFromText";
 import getSubmittedLetters from "./getSubmittedLetters";
 import getTextFromLetters from "./getTextFromLetters";
+import { data5letters } from "./data/5letters";
+import {
+  isValidateLanguageWordEnabled,
+  validateLanguageWord,
+} from "./ValidLanguageWordButton";
 
 const WORDS = [
   //4
@@ -92,12 +97,12 @@ export const GROUNDTRUTH =
 export const MAX_LETTERS = GROUNDTRUTH.length;
 export const MAX_WORDS = MAX_LETTERS + 1;
 
+//localStorage.clear();
 const dateLastSuccess = localStorage.getItem("dateLastSuccess");
 const dateLastFinish = localStorage.getItem("dateLastFinish");
 const dateLastParticipation = localStorage.getItem("dateLastParticipation");
 const currentCombo = localStorage.getItem("currentCombo");
 const totalWins = localStorage.getItem("totalWins");
-//localStorage.clear();
 //console.log("currentCombo: " + currentCombo);
 //console.log("totalWins: " + totalWins);
 console.log("dateLastSuccess: " + dateLastSuccess);
@@ -115,16 +120,14 @@ export interface SubmittedLettersInterface {
 console.log("TODAY: " + seedForToday);
 console.log(GROUNDTRUTH);
 
-function Game(): JSX.Element {
-  function handleSubmit(): void {
-    if (isSuccess || currentWordIndex === MAX_WORDS) return;
-
+function Game(props): JSX.Element {
+  function handleSubmit(newWords: LetterInterface[][]): void {
     // Save currently submitted words
-    localStorage.setItem("currentWords", JSON.stringify(words));
+    localStorage.setItem("currentWords", JSON.stringify(newWords));
     localStorage.setItem("currentWordIndex", `${currentWordIndex + 1}`);
     localStorage.setItem("dateLastParticipation", seedForToday);
 
-    if (getTextFromLetters(words[currentWordIndex]) === GROUNDTRUTH) {
+    if (getTextFromLetters(newWords[currentWordIndex]) === GROUNDTRUTH) {
       if (dateLastSuccess !== seedForToday) {
         localStorage.setItem("dateLastSuccess", seedForToday);
         localStorage.setItem("dateLastFinish", seedForToday);
@@ -152,19 +155,32 @@ function Game(): JSX.Element {
     if (letter === "↩") {
       if (currentLetterIndex !== MAX_LETTERS) return;
 
-      handleSubmit();
+      if (isSuccess || currentWordIndex === MAX_WORDS) return;
 
       const { letters, classifiedLetters } = getSubmittedLetters(
-        newWords[currentWordIndex]
-      );
-      newWords[currentWordIndex] = letters;
-      setSubmittedLetters(
-        addSubmittedLetters(submittedLetters, classifiedLetters)
+        words[currentWordIndex]
       );
 
+      console.log(isValidateLanguageWordEnabled());
+      if (isValidateLanguageWordEnabled()) {
+        const isValidLanguageWord = validateLanguageWord(
+          getTextFromLetters(letters)
+        );
+        if (!isValidLanguageWord) {
+          setIsValidLanguageWord(false);
+          return;
+        }
+      }
+
+      newWords[currentWordIndex] = letters;
       setWords(newWords);
       setCurrentWordIndex(currentWordIndex + 1);
       setCurrentLetterIndex(0);
+      setSubmittedLetters(
+        addSubmittedLetters(submittedLetters, classifiedLetters)
+      );
+      setIsValidLanguageWord(true);
+      handleSubmit(newWords);
 
       return;
     }
@@ -268,17 +284,31 @@ function Game(): JSX.Element {
     dateLastSuccess === seedForToday
   );
 
+  const [isValidLanguageWord, setIsValidLanguageWord]: [boolean, Function] =
+    React.useState(true);
+
   return (
-    <div className="word--container">
-      {words.map((word, index) => {
-        return <Word key={index} letters={word}></Word>;
-      })}
-      <Keyboard enterLetter={enterLetter} submittedLetters={submittedLetters} />
-      {/* <AddWordForm addWord={addWord} /> */}
+    <div>
       <GameOverModal
         isModalOpenInitially={isModalOpen}
         isSuccess={isSuccess}
       ></GameOverModal>
+      <div className="word--container">
+        {words.map((word, index) => {
+          const extraClass =
+            !isValidLanguageWord && currentWordIndex === index
+              ? "word--mispelled"
+              : "";
+          return (
+            <Word key={index} letters={word} extraClass={extraClass}></Word>
+          );
+        })}
+        <Keyboard
+          enterLetter={enterLetter}
+          submittedLetters={submittedLetters}
+        />
+        {/* <AddWordForm addWord={addWord} /> */}
+      </div>
     </div>
   );
 }

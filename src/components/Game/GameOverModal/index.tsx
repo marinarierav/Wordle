@@ -3,15 +3,19 @@ import { WhatsappIcon, WhatsappShareButton } from "react-share";
 import Backdrop from "../../common/Backdrop";
 import Modal from "../../common/Modal";
 import { GROUNDTRUTH } from "..";
-import { GameContext, GameContextType } from "../GameContext";
 import {
   getFullShareable,
   getShareableLink,
   getShareableText,
 } from "./getShareable";
+import { LetterInterface } from "../Word/Letter";
 
 function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
-  const { wordHistory } = React.useContext(GameContext) as GameContextType;
+  const currentWordIndex = parseInt(localStorage.getItem("currentWordIndex"));
+  let currentWords: LetterInterface[][] = JSON.parse(
+    localStorage.getItem("currentWords")
+  );
+  currentWords = currentWords ? currentWords.slice(0, currentWordIndex) : [];
 
   const [isModalOpen, setIsModalOpen] = React.useState(isModalOpenInitially);
 
@@ -31,7 +35,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
 
   function copy() {
     const el = document.createElement("textarea");
-    el.value = getFullShareable(wordHistory, isSuccess);
+    el.value = getFullShareable(currentWords, isSuccess);
 
     document.body.appendChild(el);
     el.select();
@@ -47,11 +51,14 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
         <Modal
           onCancel={reloadWindow}
           onCancelText="Retry"
+          onCancelExtraClasses="hidden"
           onConfirm={closeModalHandler}
-          onConfirmText="Ok"
+          onConfirmText="Ok 👍"
+          onConfirmExtraClasses="btn--alt share--confirm"
+          extraClass="game-over"
           title={isSuccess ? "Very good!" : "Ooops"}
         >
-          <p>The country was {GROUNDTRUTH}</p>
+          <p>The word was {GROUNDTRUTH}</p>
           <p>
             Current streak:{" "}
             <span className="share">
@@ -70,17 +77,18 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
             <li className="">
               <WhatsappShareButton
                 url={getShareableLink()}
-                title={getShareableText(wordHistory, isSuccess)}
+                title={getShareableText(currentWords, isSuccess)}
               >
                 <WhatsappIcon size={32} round={true}></WhatsappIcon>
               </WhatsappShareButton>
             </li>
             <li>
               <button className="btn share--button" onClick={copy}>
-                {!copied ? "Copy 📋" : "Copied!✅"}
+                {!copied ? "Copy 📋" : "Copied! ✅"}
               </button>
             </li>
           </ul>
+          <p className="share--come-back">Come back tomorrow for more...</p>
         </Modal>
       )}
       {isModalOpen && <Backdrop onClick={closeModalHandler} />}{" "}

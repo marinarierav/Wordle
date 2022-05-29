@@ -14,11 +14,15 @@ export interface LetterInterface {
   type: LetterType;
 }
 
-function Letter({ letter, type }: LetterInterface): JSX.Element {
+function Letter({
+  letter,
+  type,
+  extraClass,
+}: LetterInterface & { extraClass: string }): JSX.Element {
   return (
     <div
       className={
-        "letter " +
+        `letter ${extraClass} ` +
         (type === LETTER_CORRECT
           ? "letter--correct"
           : type === LETTER_MISPLACED
