@@ -1,15 +1,22 @@
 import React from "react";
+import { data4letters } from "../data/4letters";
 import { data5letters } from "../data/5letters";
+import { data6letters } from "../data/6letters";
 
 const ENABLED_TEXT = "Enabled";
 const DISABLED_TEXT = "Disabled";
 
+const data = {
+  "4": data4letters,
+  "5": data5letters,
+  "6": data6letters,
+};
+
 export function validateLanguageWord(text: string): boolean {
-  return data5letters.indexOf(text.toLocaleLowerCase()) >= 0;
+  return data[text.length].indexOf(text) >= 0;
 }
 
 export function isValidateLanguageWordEnabled(): boolean {
-  console.log();
   return localStorage.getItem("isValidateLanguageWord") === ENABLED_TEXT;
 }
 

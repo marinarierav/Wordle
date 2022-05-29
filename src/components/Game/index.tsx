@@ -12,6 +12,7 @@ import {
   isValidateLanguageWordEnabled,
   validateLanguageWord,
 } from "./ValidLanguageWordButton";
+import { ucfirst } from "./functions/string";
 
 const WORDS = [
   //4
@@ -161,12 +162,11 @@ function Game(props): JSX.Element {
         words[currentWordIndex]
       );
 
-      console.log(isValidateLanguageWordEnabled());
       if (isValidateLanguageWordEnabled()) {
-        const isValidLanguageWord = validateLanguageWord(
-          getTextFromLetters(letters)
-        );
-        if (!isValidLanguageWord) {
+        const text = getTextFromLetters(letters).toLowerCase();
+        const isValidLanguageWord = validateLanguageWord(text);
+
+        if (!isValidLanguageWord && WORDS.indexOf(ucfirst(text)) < 0) {
           setIsValidLanguageWord(false);
           return;
         }
