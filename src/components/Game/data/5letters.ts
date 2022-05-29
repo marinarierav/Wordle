@@ -23,7 +23,7 @@ export const data5letters = [
   "alter",
   "among",
   "anger",
-  "Angle",
+  "angle",
   "angry",
   "apart",
   "apple",
