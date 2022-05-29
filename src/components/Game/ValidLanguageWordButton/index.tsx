@@ -36,7 +36,7 @@ function ValidLanguageWordButton(): JSX.Element {
   }
   return (
     <button className="btn" onClick={setIsValidateLanguageWordHandler}>
-      Validate word exists: {isValidateLanguageWord}
+      Only allow English words: {isValidateLanguageWord}
     </button>
   );
 }

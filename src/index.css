@@ -373,6 +373,20 @@ ul {
   background-color: rgb(172, 172, 172);
 }
 
+.alert--not-found {
+  color: #9c1458;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.alert--not-found--icon {
+  font-style: normal;
+  text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000,
+    0.5px 0.5px 0 #000;
+  line-height: 0rem;
+  font-size: large;
+}
+
 p,
 a {
   margin-block-start: 0.5rem;
