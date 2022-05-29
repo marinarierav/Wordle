@@ -31,7 +31,7 @@ export function getShareableText(
   isSuccess: boolean
 ): string {
   return (
-    `#Wordle (English) 1º ${
+    `#Wordle (English) ${
       isSuccess ? wordHistory.length : "X"
     }/${MAX_WORDS}\r\n` + getPrettySquares(wordHistory)
   );
