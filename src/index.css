@@ -387,6 +387,10 @@ ul {
   font-size: large;
 }
 
+.nav-list {
+  display: flex;
+}
+
 p,
 a {
   margin-block-start: 0.5rem;

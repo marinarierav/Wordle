@@ -1,18 +1,10 @@
-import { Link } from "react-router-dom";
 import Wordle from "./components/Wordle";
+import { FLAVOR_CLASSIC } from "./config/flavors";
 
 function App() {
   return (
     <main>
-      <Wordle></Wordle>
-      <nav
-        style={{
-          padding: "0.5rem",
-        }}
-      >
-        <Link to="/worldle">Worldle</Link> |{" "}
-        <Link to="/hogwarts">Hogwarts</Link> | <Link to="/disney">Disney</Link>
-      </nav>
+      <Wordle flavor={FLAVOR_CLASSIC}></Wordle>
     </main>
   );
 }

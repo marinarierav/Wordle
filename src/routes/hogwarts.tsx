@@ -1,7 +1,8 @@
-export default function Hogwarts() {
-  return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Hogwarts</h2>
-    </main>
-  );
+import Wordle from "../components/Wordle";
+import { FLAVOR_HOGWARTS } from "../config/flavors";
+
+function Hogwarts() {
+  return <Wordle flavor={FLAVOR_HOGWARTS} />;
 }
+
+export default Hogwarts;
