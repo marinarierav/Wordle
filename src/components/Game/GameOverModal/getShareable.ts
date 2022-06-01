@@ -9,6 +9,12 @@ export function getShareableLink(): string {
   return "marinarierav-wordle.herokuapp.com";
 }
 
+export function getCurrentStreak(): string {
+  const currentCombo = localStorage.getItem("currentCombo") || 0;
+  const totalWins = localStorage.getItem("totalWins") || 0;
+  return `Current streak: ${currentCombo}\r\nTotal wins: ${totalWins}\r\n`;
+}
+
 export function getPrettySquares(wordHistory: LetterInterface[][]) {
   let prettySquares = "";
   wordHistory.forEach((word) => {
@@ -33,7 +39,9 @@ export function getShareableText(
   return (
     `#Wordle (English) ${
       isSuccess ? wordHistory.length : "X"
-    }/${MAX_WORDS}\r\n` + getPrettySquares(wordHistory)
+    }/${MAX_WORDS}\r\n` +
+    getPrettySquares(wordHistory) +
+    getCurrentStreak()
   );
 }
 
