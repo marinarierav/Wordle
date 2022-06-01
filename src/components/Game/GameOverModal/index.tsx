@@ -66,7 +66,7 @@ function GameOverModal({ isModalOpenInitially, isSuccess }): JSX.Element {
             </span>
           </p>
           <p>
-            Total Wins:{" "}
+            Total wins:{" "}
             <span className="share">
               {localStorage.getItem("totalWins") || "0"}
             </span>
